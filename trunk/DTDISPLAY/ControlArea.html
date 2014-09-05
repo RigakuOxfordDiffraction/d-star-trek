@@ -1,0 +1,87 @@
+<HTML>
+<HEAD>
+<!--
+ Copyright (c) 1995 Molecular Structure Corporation
+
+ RESTRICTED RIGHTS NOTICE SHORT FORM (JUNE 1987)
+
+ Use, reproduction, or disclosure is subject to restrictions set
+ forth in Contract No. W-31-109-ENG-38 and Contract No.
+ 943072401 with the University of Chicago, Operator of
+ Argonne National Laboratory.
+-->
+<TITLE>
+Help for dtdisplay: Control area
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<H3>dtdisplay on-line help</H3>
+<H1>Control area</H1>
+Along the left side of the main window below the menu bar is a control panel.  The panel 
+contains a scrolled text output area, text fields to change the detector position and 
+wavelength and buttons to move to the next or previous image in a scan.
+ 
+<dl>
+<dt>Scrolled Text Output
+<dd>	The scrolled text output is a flexible way to provide information about points 
+selected in the large image display area.  When you select pixels in the large image area, 
+the information in the scrolled text area usually contains:
+<p><pre>
+        Pixel position
+	Pixel value
+	Millimeter position
+	Resolution
+	Integrated intensity and standard deviation
+	Average background and standard deviation
+</pre>
+<p>
+If the Measure toggle button in the View menu is set, then the crystallographic d-spacing 
+between the selected pixel and the previously selected pixel will be reported.  The 
+information reported does depend on a number of factors.  The millimeter position, 
+resolution and d-spacing all depend on knowledge of the detector position, the detector 
+spatial distortion and the source wavelength.  If this additional information is unavailable, 
+then millimeter position, resolution and d-spacing will not be reported.
+<p>
+Use the scrollbar to scroll the output backwards and forwards.  The output may be cleared 
+by first selecting it and then choosing the Clear selected output command from the Edit 
+menu.
+<p>
+<dt>Rot. start, Rot. end
+<dd>	Enter the rotation start angle and end angle for the image.  Presently, these have 
+no effect.
+
+<dt>Det swing
+<dd>	Enter the desired detector swing angle in degrees.  The direction of the swing axis 
+is specified in the header and is usually the theta or 2theta value of the detector.  Use this 
+command to check the resolution limits at a particular detector position.  The starting 
+value for the swing angle is read from the image header.  The value is updated only after a 
+carriage return or when the text field loses input focus.
+
+<dt>Det dist
+<dd>	Enter the desired detector to sample distance in millimeters.  Use this command to 
+check the resolution limits at a particular detector position.  The starting value for the 
+distance is read from the image header.  The value is updated only after a carriage return 
+or when the text field loses the input focus.
+
+<dt>Wavelength
+<dd>	Enter the wavelength in Angstroms. The value is updated only after a carriage return or when the text field loses the input focus.
+<dt><b>NOTE:</b>
+<dd>If you changed the detector distance or swing angle or the wavelength, then
+the minimum and maximum resolution available on the detector is displayed in
+the scrolled text output in the upper left of the main window.
+
+<dt>Prev, Next, No.
+<dd>	These commands let you easily select the previous image, the next image or a 
+specific image sequence number in a scan to read in and view.  If a scan definition is not 
+found in the image header, then these commands should be insensitive.  You may specify 
+your own scan definition with the <A HREF=FileMenu.html>Image template... </A>
+command in the File menu.  When 
+an image is read with the Prev, Next or No. commands, the mapping of pixel values to 
+colors is not changed, but the current mapping is used.  If an error occurs when reading 
+the image file, then the image display areas go blank.
+
+</dl>
+</BODY>
+</HTML>

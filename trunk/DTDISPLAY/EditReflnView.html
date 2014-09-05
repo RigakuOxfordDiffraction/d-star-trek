@@ -1,0 +1,99 @@
+<HTML>
+<HEAD>
+<!--
+ Copyright (c) 1995 Molecular Structure Corporation
+
+ RESTRICTED RIGHTS NOTICE SHORT FORM (JUNE 1987)
+
+ Use, reproduction, or disclosure is subject to restrictions set
+ forth in Contract No. W-31-109-ENG-38 and Contract No.
+ 943072401 with the University of Chicago, Operator of
+ Argonne National Laboratory.
+-->
+<!--
+
+ Copyright (C) 2014 Rigaku Americas Corporation
+                    9009 New Trails Drive
+                    The Woodlands, TX, USA  77381
+
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice(s), this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice(s), this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Rigaku Americas Corporation nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+ DAMAGE.
+
+-->
+<TITLE>
+Help for dtdisplay: Reflection View Properties
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<H3>dtdisplay on-line help</H3>
+<H1>Reflection View Properties</H1>
+
+Choose Refln View Props... in the Edit menu to display a dialog box with the current 
+reflection view properties as shown below.  This dialog box is not active yet.  The 
+view properties include Symbol, Size, Color, Visibility, Restrict, and Rotation range.  In 
+most cases the values set in this dialog do not take effect until either the OK or Apply 
+button is selected.  Also, if no image is currently displayed, then settings made in this 
+dialog box have no effect.  Selecting Help activates the HTML viewer for on-line help.
+<p>
+<img src=EditReflnView.gif>
+<p>Reflection view properties dialog.
+<p> 
+<dl>
+<dt>Reflection list
+<dd>	This shows the file name of the reflection list.  Use File Load refln list... to load 
+the reflection list.
+
+<dt>Symbol
+<dd>	Select the symbol used to draw reflections with.  You can choose a plus sign, an X 
+(cross), a circle or a box.  Only a plus sign is supported now!
+
+<dt>Size
+<dd>	Enter the size of the symbol in pixels.  The size is fixed at 20! 
+
+<dt>Color
+<dd>	Select the color of the symbol.  The default color is set by the reflnPlotColor 
+resource (see section 5.2).
+
+<dt>Visibility
+<dd>	Select whether this reflection list will be plotted (visible) or not.
+
+<dt>Restrict rotation range
+<dd>	Select whether all reflections in a list should be plotted or whether only reflections 
+that fall with a restricted rotation range.
+
+<dt>Rotation range
+<dd>	Enter if the restricted range range for reflections to be plotted.  This range is only 
+used if Restrict rotation range is in effect.
+
+<dt>Clear selected output
+<dd>	When this command is activated, any selected text in the scrolled text output 
+window is deleted.  Text is selected in the normal Motif style: double-, triple- or 
+quadruple-clicking the mouse button, dragging the mouse pointer while holding down the 
+shift key, etc.
+</dl>
+</BODY>
+</HTML>

@@ -1,0 +1,99 @@
+<HTML>
+<HEAD>
+<!--
+ Copyright (c) 1995 Molecular Structure Corporation
+
+ RESTRICTED RIGHTS NOTICE SHORT FORM (JUNE 1987)
+
+ Use, reproduction, or disclosure is subject to restrictions set
+ forth in Contract No. W-31-109-ENG-38 and Contract No.
+ 943072401 with the University of Chicago, Operator of
+ Argonne National Laboratory.
+-->
+<!--
+
+ Copyright (C) 2014 Rigaku Americas Corporation
+                    9009 New Trails Drive
+                    The Woodlands, TX, USA  77381
+
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice(s), this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice(s), this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Rigaku Americas Corporation nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+ DAMAGE.
+
+-->
+<TITLE>
+Help for dtdisplay: Getting Started
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<H3>dtdisplay on-line help</H3>
+<H1>Getting Started</H1>
+
+When you collect and process single crystal diffraction images from a position-sensitive 
+detector, it is very useful to visualize or see the images.  You want to check that the 
+crystal diffracts and that the Bragg peaks can be integrated.  The suitability of a crystal for 
+further data collection and analysis depends on a number of factors and compromises.  
+Among these factors are:
+<UL>
+<LI>crystal unit cell
+<LI>  spot shape (no split peaks or satellites)
+<LI>  diffraction limit
+<LI>  spot separation
+<LI>  exposure time
+<LI>  rotation angle increment
+<LI>  detector position
+</UL>
+
+For example, if the unit cell lengths are large, then the diffraction spots will be spaced 
+close together and the detector will have to be moved further from the crystal.  Often only 
+by viewing images can you judge whether or not you should collect diffraction data from a 
+crystal.  The <b>dtdisplay</b> program displays images and allows you to decide whether to 
+proceed.
+<P>
+<B>dtdisplay</B> uses a color X Window display and the OSF/Motif widget set and style.  Both 
+X and OSF/Motif are widely used on workstations, so you may already by familiar with 
+them and consequently already know how to run and use <b>dtdisplay</b>.  If you are not 
+familiar, do not worry as <b>dtdisplay</b> is very easy to use and comes with many help features.  
+Before you start <b>dtdisplay</b> be sure your DISPLAY environment variable is set to your 
+current display and the <tt>Dtdisplay</tt> application defaults file is accessible to your X server.  
+The latter file can be placed in the system-wide application defaults directory (e.g. 
+<tt>usr/lib/X11/app-defaults</tt>) or in your home directory.  Please consult the installation 
+guide in section 5 and your system manager.
+
+
+<H4>Running dtdisplay</h4>
+
+After <b>dtdisplay</b> has been installed and placed in your PATH, just enter <tt>dtdisplay</tt> along 
+wiith an optional image filename to run it.   Since <b>dtdisplay</b> is an X Window program the 
+standard X command line options are also supported.  Messages are written to stdout and 
+stderr as required. The syntax for running <b>dtdisplay</b> is simply:
+<p>
+<tt>dtdisplay [image_file]</tt>
+<p>
+Remember, the image filename after the <tt>dtdisplay</tt> command is optional.
+
+</BODY>
+</HTML>

@@ -1,0 +1,163 @@
+<HTML>
+<HEAD>
+<!--
+ Copyright (c) 1995 Molecular Structure Corporation
+
+ RESTRICTED RIGHTS NOTICE SHORT FORM (JUNE 1987)
+
+ Use, reproduction, or disclosure is subject to restrictions set
+ forth in Contract No. W-31-109-ENG-38 and Contract No.
+ 943072401 with the University of Chicago, Operator of
+ Argonne National Laboratory.
+-->
+<!--
+
+ Copyright (C) 2014 Rigaku Americas Corporation
+                    9009 New Trails Drive
+                    The Woodlands, TX, USA  77381
+
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice(s), this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice(s), this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Rigaku Americas Corporation nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+ DAMAGE.
+
+-->
+<TITLE>
+Help for dtdisplay: Edit Image View Properties
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<H3>dtdisplay on-line help</H3>
+<H1>Edit Image View Properties</H1>
+
+In the Edit menu, choose Image View Props... to display a dialog box with the current 
+image view properties.  The view properties include Integration box size, Saturated 
+pixel cutoff, Saturated pixel color, White pixel in image, Black pixel in image, Image border fraction,
+Orientation, Preserve aspect ratio, Pixel aspect ratio, and Auto rescale.
+The values set in this dialog 
+do not take effect until either the OK or Apply button is selected.  Also, if no image is 
+currently displayed, then settings made in this dialog box have no effect.  Selecting Help 
+activates the HTML viewer for on-line help.
+<p>
+The dialog box has two halves -- a left one and a right one.  To view the full dialog box, 
+select the small arrow button below and to the right of the Image border fraction.  To 
+return to view to the left half, select the arrow button again.
+<p>
+<img src=EditImageView.gif>
+<p>Image view properties dialog.
+<p> 
+<dl>
+<dt><b>Static image properties</b>
+<dt>Image size
+<dd>The number of pixels in the fast and slow directions in the image.
+<dt>Min, max
+<dd>These are the minimum and maximum pixel values in the
+the image exluding a border of 10% around all 4 sides.
+<dt>Average, sd
+<dd>These are the pixel value average and standard deviation calculated
+from the image excluding a border of 10% around all 4 sides.
+<dt>Rot start
+<dd>This is the relative rotation angle start from the image header
+<dt>Rot end
+<dd>This is the relative rotation angle end from the image header
+<dt>Exposure time
+<dd>This is the image exposure time in seconds from the image header
+</dl>
+<dl>
+<dt><b>Adjustable image properties</b>
+<dt>Integration box size
+<dd>	Enter the integrate box size in pixels in the FAST and SLOW image directions 
+separated by a comma (,).  When a pixel is selected in the image display area, then the 
+pixels in an area Ix by Iy are integrated.  First an average and standard deviation is 
+computed, then after excluding pixels with a value 3sigma above that average a new 
+average and standard deviation is computed.  Then all the pixels in the area are summed 
+and the average pixel value times the number of pixels is subtracted.  This gives a rough 
+estimate of the integrated intensity of a picked Bragg reflection.  If the non-uniformity 
+information is available, then the area is corrected for non-uniformity first.  If the Integrate 
+box size is less than 2 x 2, then a default value of 24 x 24 is used.  No effort is made to 
+exclude neighboring spots from the integrate box when the calculations are made.
+Resource file default: *cUIimageviewprops*tfBoxSize.value:  25, 25
+<dt>Saturated pixel cutoff
+<dd>	Enter the minimum value of a saturated pixel.  All pixel values that are greater than 
+or equal to this value will be displayed in the selected Saturated pixel color.
+Resource file default: *cUIimageviewprops*tfSatValue.value:  65535.0
+<dt>Saturated Pixel Color
+<dd>	Select the color used to display saturated pixels from the combo box.  A limited 
+number of colors is available.
+Resource file default: *cUIimageviewprops*omColor*labelString: Red
+<dt>White pixel in image (Minimum scale value)
+<dd>	Pixel values below this threshold are all set to white.  This value may also be
+changed through the color scale below the image.
+
+<dt>Black pixel in image (Maximum scale value)
+<dd>	Pixel values above this threshold are all set to black.  This value may also be
+changed through the color scale below the image.
+
+<dd>NOTE on color scale mapping:
+
+<dd>If the White pixel value is more than the Black pixel value, then the color scaling is 
+reversed.  Thus, if these values are 10 and 5000, then the color mapping runs from white 
+(low) to black (high).  If these values are 5000 and 10, then the color mapping runs from 
+white (high) to black (low) which reverses the color mapping.
+
+The starting values for the white and black thresholds are set automatically whenever a 
+image is read in with the Open command in the File menu.  The average and standard 
+deviation of all pixels except a border of 10% along the four edges is calculated.  The 
+white threshold is set to the average - 1.5 * standard deviation.  The black threshold is set 
+to the average + 5.0 * standard deviation.
+
+<dt>Image border fraction
+<dd>	If this is less than 1, a border is reserved on the right and bottom sides of the
+image display area for drawing line profiles.  A value of 0.9 results in the image
+area occupying 90% of the drawing area with the line profiles occupying strips of 10% on 
+the right and bottom sides.
+Resource file default: *cUIimageviewprops*tfBorder.value:  0.9
+<dt>Orientation	
+<dd>	A combo box is used to select one of eight possible orientations for the image 
+display.  The choices show how the image FAST and SLOW pixel directions should be 
+mapped to the X Window coordinate system X and Y.  X runs across the display while Y 
+runs down the display.  Do not confuse the X Window display XY coordinates with the 
+laboratory XY coordinates.  The selected orientation is applied only after selecting the 
+OK or Apply button.
+Resource file default: *cUIimageviewprops*omOrient*labelString: +X +Y
+
+<dt>Preserve aspect ratio
+<dd>	Select whether the Pixel Aspect Ratio will be preserved when displaying images.  
+This is useful when you want to preserve the image aspect ratio when you resize the image 
+display area.
+
+<dt>Pixel aspect ratio
+<dd>	Enter the pixel size aspect ratio.  The ratio is the size of the pixel in the FAST 
+direction divided by the size of the pixel in the SLOW direction: FAST / SLOW.  For 
+example, if the detector pixels are 1.28 mm by 2.00 mm, then enter 0.64 for the aspect 
+ratio.
+
+<dt>Auto rescale
+<dd>	This is reserved for future use and has no effect now.
+<dt>Reserved
+<dd>	This is reserved for future use and has no effect now.
+
+</BODY>
+</HTML>

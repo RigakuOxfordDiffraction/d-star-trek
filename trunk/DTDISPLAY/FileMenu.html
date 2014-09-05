@@ -1,0 +1,186 @@
+<HTML>
+<HEAD>
+<!--
+ Copyright (c) 1995 Molecular Structure Corporation
+
+ RESTRICTED RIGHTS NOTICE SHORT FORM (JUNE 1987)
+
+ Use, reproduction, or disclosure is subject to restrictions set
+ forth in Contract No. W-31-109-ENG-38 and Contract No.
+ 943072401 with the University of Chicago, Operator of
+ Argonne National Laboratory.
+-->
+<!--
+
+ Copyright (C) 2014 Rigaku Americas Corporation
+                    9009 New Trails Drive
+                    The Woodlands, TX, USA  77381
+
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice(s), this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice(s), this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Rigaku Americas Corporation nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+ DAMAGE.
+
+-->
+<TITLE>
+Help for dtdisplay: File menu
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<H1>dtdisplay on-line help</H1>
+<H1>File menu</H1>
+
+The File menu is used to create new images, to open existing images and to load reflection 
+lists that are displayed.  New images that are created can also be saved to disk files.  The 
+commands in the file menu are New, Open, Save As, Image Template, Preferences, Print,
+Respond to updates and Exit.
+
+<DL>
+<dt>New
+<dd>	The New command popups a menu with the following choices:
+<ul>
+<li>Image File...
+<li>  Scan...
+<li>  Overlay...
+<li>  Tile...
+<li>  Underlay...
+<li>  Average...
+<li>  Statistics...
+</ul>
+<blockquote>
+<dt>Image file...
+<dd>	When this is activated, a <A HREF=FileTemplate.html>file selection dialog box</A> appears.  Select an image file 
+from the list of files and then select OK.  The file will be read in, automatically scaled to 
+the color table and displayed.
+<dt>Scan
+<dd>	This command is not yet implemented, therefore it is insensitive and cannot be 
+selected.
+
+<dt>Overlay
+<dd>	Overlay creates a new image by overlaying a series of images and displays the 
+resulting image.  The image can be saved to disk by selecting the File Save As... 
+command.  To use this command, first read in and display an image with either the File 
+Open... or File New Image File... commands.  Then select File New Overlay....  The 
+(<A HREF=FileTemplate.html>file selection dialog box</A> appears.  Enter the image filename 
+template (include ? for replacable digits), sequence number start, the 
+sequence number increment and the number of images to overlay, then select OK, overlay.  The image filenames will be constructed from the 
+template and a sequence number by replacing the question marks (?) in the template with the 
+sequence number.  For example, an image template <tt>ribosome.????</tt> might represent the 
+files <tt>ibosome.0001</tt>, <tt>ribosome.0002</tt>, etc.
+<p>
+When images are overlayed, the highest pixel value in any input image for a given position 
+is placed in the created image.  For example, if you have three 2x2 images with pixel 
+values:<PRE>
+	1  2		2  3		4  3
+	3  4		4  1		2  1
+</PRE>the overlay result image will be:<pre>
+	4  3
+	4  4
+</PRE>The overlay command is useful to create pseudo rotation images that span a larger volume 
+of reciprocal space.
+			
+If an error occurs while reading in an image, then the overlaying stops and the overlayed 
+image in its current state is displayed.
+
+<dt>Average
+<dd>	Average is similar to the overlay command and works the same way.  Instead of 
+selecting the highest pixel value for the output image, the average value is calculated.
+In addition, an image of standard deviations is calculated and written to the file named 
+by the first image used in the averaging with the characters 'sd' appended.
+
+<dt>Tile
+<dd>	Tile creates a new image by tiling a series of images and displays the resulting 
+image.  The image can be saved to disk by selecting the File Save As... command.  To use 
+this command, first read in and display an image with either the File Open... or File New 
+Image File... commands.  Then select File New Tile....  The 
+(<A HREF=FileTemplate.html>file selection dialog box</A> appears.  Enter the image filename 
+template (include ? for replacable digits), sequence number start, the sequence number increment, 
+the number of images to overlay and the image filename template, then select OK, tile.  
+The image filenames will be constructed from the template and a sequence number by 
+replacing the hash marks (?) in the template with the sequence number.
+<p>
+The tiled image has the same dimensions and data type as the input images.  In order to 
+achieve this, some pixels in the input images are skipped over. Zooming in on a displayed 
+tiled image does not recover the pixels skipped over.  The number of rows and columns in 
+the output image is a function of the number of images.  For example, if 4 images are tiled, 
+then the tiled image will be 2x2.  If 6 images are tile, then the tiled image will be 2 x 3 with 
+gaps along each row.  To avoid gaps, choose a number of images that is the square of an 
+integer (namely, 4, 9, 16, 25, ...).  Furthermore, the first image is placed at position (0, 0) 
+while the next image is adjacent to the first image on the same row.  Rows run along the 
+FAST pixel direction while columns run down the SLOW pixel direction.  In the display, 
+the FAST and SLOW directions may have a non-standard orientation (see Orientation in 
+section 3.1.2.1).
+<p>
+If an error occurs while reading in an image, then the tiling stops and the tiled image in its 
+current state is displayed.  
+
+<dt>Statistics
+<dd>	When implemented, Statistics will create two new images from a series of images.  
+The new images will contain the average and the standard deviation at each pixel position. 
+This command is not yet implemented, therefore it is insensitive and cannot be selected.
+</blockquote>
+<dt>Open...
+<dd>	The File Open... command selects an image file to display.  When this is activated, 
+the
+(<A HREF=FileTemplate.html>file selection dialog box</A> appears. Select an image file from 
+the list and then select OK, open.  
+The file will be read in, automatically scaled to the color table and displayed.
+
+<dt>Load reflnlist
+<dd>	The File Load Reflnlist... command selects a reflection list to display.  When this 
+is activated, a file selection dialog box appears.  Select a reflection list file from the list and 
+then select OK.  The file will be read in and displayed.  If reflections are not displayed, 
+check that Observed reflns is set in the View menu.  Check also that the reflection list 
+contains the fields “Observed_px1” and “Observed_px2”.
+<p>
+The properties of the reflection list display can be edited by selecting Edit reflection 
+properties... in the Edit menu (see 3.1.2).
+
+<dt>Save As...
+<dd>	This command saves the currently displayed image to a file.  If there is no currently 
+displayed image, then this command does nothing.    A
+(<A HREF=FileTemplate.html>file selection dialog box</A> appears which 
+allows you to enter a filename for the new image.  If you select a filename that already 
+exists, the new image will overwrite the file unless the old file is write protected.
+
+<dt>Image template...
+<dd>	This command lets you view and edit the current settings for the image filename 
+template and sequence numbers.  A 
+(<A HREF=FileTemplate.html>file selection dialog box</A> appears.
+The settings in the dialog box come from the header of the last image 
+read in or from the last time the image template dialog appeared.  Remember that 
+Overlay, Average, Tile and Statistics in the File New menu all use the image template 
+dialog.
+
+<dt>Respond to updates
+<dd>If this toggle button is set, then <b>dtdisplay</b> listens and
+responds to updates from other X Window clients.  Thus other clients, such as <b>dtcollect</b>
+can request that <b>dtdisplay</b> read and display a new image or reflection list.
+If this toggle button is not set, then <b>dtdisplay</b> ignores requests from other clients.
+<dt>Exit
+<dd>	This command exits from <b>dtdisplay</b>.
+
+</BODY>
+</HTML>

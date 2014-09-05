@@ -1,0 +1,146 @@
+<HTML>
+<HEAD>
+<!--
+ Copyright (c) 1995 Molecular Structure Corporation
+
+ RESTRICTED RIGHTS NOTICE SHORT FORM (JUNE 1987)
+
+ Use, reproduction, or disclosure is subject to restrictions set
+ forth in Contract No. W-31-109-ENG-38 and Contract No.
+ 943072401 with the University of Chicago, Operator of
+ Argonne National Laboratory.
+-->
+<!--
+
+ Copyright (C) 2014 Rigaku Americas Corporation
+                    9009 New Trails Drive
+                    The Woodlands, TX, USA  77381
+
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice(s), this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice(s), this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Rigaku Americas Corporation nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+ DAMAGE.
+
+-->
+<TITLE>
+Help for dtdisplay: Image View Properties
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<H3>dtdisplay on-line help</H3>
+<H1>Image View Properties</H1>
+
+Choose Image View Props... in the Edit menu to display a dialog box with the current 
+image view properties.  The view properties include Zoom factor, 
+White pixel in image, Black pixel in image, Orientation, Pixel aspect ratio, Integrate box, 
+Saturated pixel value, and Saturated pixel color.  In most cases the values set in this dialog 
+do not take effect until either the OK or Apply button is selected.  Also, if no image is 
+currently displayed, then settings made in this dialog box have no effect.  Selecting Help 
+activates the HTML viewer for on-line help.
+<p>
+The dialog box has two halves -- a left one and a right one.  To view the full dialog box, 
+select the small arrow button above and to the right of the Black pixel in image scale.  To 
+return to view to the left half, select the arrow button again.
+<p>
+<img src=EditImageView.gif>
+<p>Image view properties dialog.
+<p> 
+
+<dl>
+<dt>Zoom factor
+<dd>	This specifies the zoom factor.  Normally the zoom factor is left at 1.0 and the 
+middle mouse button is used to drag out a zoom box (see section 3.3).  The zoom factor 
+may be less than 1.0 in which case the current image is tiled into the image display area.  
+You may either change the scale slider or enter the zoom factor in the text field below the 
+slider.  The zoom factor is applied only after selecting the OK or Apply button.
+
+<dt>White pixel in image (White threshold)
+<dd>	Pixel values below this threshold are all set to white.  You may either change the 
+slider or enter the new value in the text field below the slider.  If the slider is used, the new 
+value is applied when the slider is released.  If the text field is used, the new value is 
+applied only after selecting the OK or Apply button.
+
+<dt>Black pixel in image (Black threshold)
+<dd>	Pixel values above this threshold are all set to black.  You may either change the 
+slider or enter the new value in the text field below the slider.  If the slider is used, the new 
+value is applied when the slider is released.  If the text field is used, the new value is 
+applied only after selecting the OK or Apply button.
+
+NOTE on color scale mapping
+
+If the White pixel value is more than the Black pixel value, then the color scaling is 
+reversed.  Thus, if these values are 10 and 5000, then the color mapping runs from white 
+(low) to black (high).  If these values are 5000 and 10, then the color mapping runs from 
+white (high) to black (low) which reverses the color mapping.
+
+The starting values for the white and black thresholds are set automatically whenever a 
+image is read in with the Open command in the File menu.  The average and standard 
+deviation of all pixels except a border of 10% along the four edges is calculated.  The 
+white threshold is set to the average - 1.5 * standard deviation.  The black threshold is set 
+to the average + 5.0 * standard deviation.
+
+<dt>Orientation	
+<dd>	A combo box is used to select one of eight possible orientations for the image 
+display.  The choices show how the image FAST and SLOW pixel directions should be 
+mapped to the X Window coordinate system X and Y.  X runs across the display while Y 
+runs down the display.  Do not confuse the X Window display XY coordinates with the 
+laboratory XY coordinates.  The selected orientation is applied only after selecting the 
+OK or Apply button.
+
+<dt>Pixel Aspect Ratio
+<dd>	Enter the pixel size aspect ratio.  The ratio is the size of the pixel in the FAST 
+direction divided by the size of the pixel in the SLOW direction: FAST / SLOW.  For 
+example, if the detector pixels are 1.28 mm by 2.00 mm, then enter 0.64 for the aspect 
+ratio.  The entered ratio is applied only after selecting the OK or Apply button.
+
+<dt>Preserve Aspect Ratio
+<dd>	Select whether the Pixel Aspect Ratio will be preserved when displaying images.  
+This is useful when you want to preserve the image aspect ratio when you resize the image 
+display area.  This is applied only after selecting the OK or Apply button.
+
+<dt>Integrate Box Size
+<dd>	Enter the integrate box size in pixels in the FAST and SLOW image directions 
+separated by a comma (,).  When a pixel is selected in the image display area, then the 
+pixels in an area Ix by Iy are integrated.  First an average and standard deviation is 
+computed, then after excluding pixels with a value 3sigma above that average a new 
+average and standard deviation is computed.  Then all the pixels in the area are summed 
+and the average pixel value times the number of pixels is subtracted.  This gives a rough 
+estimate of the integrated intensity of a picked Bragg reflection.  If the non-uniformity 
+information is available, then the area is corrected for non-uniformity first.  If the Integrate 
+Box Size is less than 2 x 2, then a default value of 24 x 24 is used.  No effort is made to 
+exclude neighboring spots from the integrate box when the calculations are made. This is 
+applied only after selecting the OK or Apply button.
+
+<dt>Saturated Pixel Value
+<dd>	Enter the minimum value of a saturated pixel.  All pixel values that are greater than 
+this value will be displayed in the Saturated Pixel Color.  This is applied only after 
+selecting the OK or Apply button.
+
+<dt>Saturated Pixel Color
+<dd>	Select the color used to display saturated pixels from the combo box.  A limited 
+number of colors is available.  This is applied only after selecting the OK or Apply button.
+
+</BODY>
+</HTML>

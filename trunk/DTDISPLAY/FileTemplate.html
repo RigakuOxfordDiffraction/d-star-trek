@@ -1,0 +1,104 @@
+<HTML>
+<HEAD>
+<!--
+ Copyright (c) 1995 Molecular Structure Corporation
+
+ RESTRICTED RIGHTS NOTICE SHORT FORM (JUNE 1987)
+
+ Use, reproduction, or disclosure is subject to restrictions set
+ forth in Contract No. W-31-109-ENG-38 and Contract No.
+ 943072401 with the University of Chicago, Operator of
+ Argonne National Laboratory.
+-->
+<!--
+
+ Copyright (C) 2014 Rigaku Americas Corporation
+                    9009 New Trails Drive
+                    The Woodlands, TX, USA  77381
+
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice(s), this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice(s), this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Rigaku Americas Corporation nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+ DAMAGE.
+
+-->
+<TITLE>
+Help for dtdisplay: File Template Dialog
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<H3>dtdisplay on-line help</H3>
+<H1>File Template Dialog</H1>
+
+The File Template dialog selects a single image or a series of images from a scan
+for use with the Open, Overlay, Tile, Underlay, Average, Statistics, 
+Prev, Next and No. commands.  In general, both the title to the selection dialog and
+the "OK" button label change to reflect the current use of the selection dialog.
+<p>
+<img src=FileTemplate.gif>
+<p>Image file selection dialog.
+<p> 
+<dl>
+<dt>Filter or template
+<dd>This specifies the filename template.  Files which match this template are
+listed in the Files field.
+It is important that the template contains question marks, if the template is to be
+used by Tile, Overlay, Underlay, Average, etc.
+<dt>Directories
+<dd>Shows the current directory name and immediate directory tree.  Select a new directory 
+by double-clicking on a directory here.
+<dt>Files
+<dd>Shows the files in the selected directory which match the Filter or Template.  Double-click
+on a file to select it.
+<dt>Seq start
+<dd>The starting or first sequence number to be used in conjunction with the Template.
+<dt>Seq incr
+<dd>The increment between images.  This value will be added to 
+the starting sequence number to get the second image number.  It may be
+negative to decrement the sequence number.
+<dt>Num images
+<dd>The number of images to use in any Tile, Overlay, Average or Statistics operation.
+<dt>Image file
+<dd>Select the filename to open or save as.  This control is missing for Tile, Underlay,
+Overlay, and Average operations, since a series of filenames is constructed from the Template,
+Seq start, Seq incr and Num images controls.
+</dl>
+<b>Examples</b>
+<p>
+Below are three examples.  In each case the template, the starting sequence
+number, the increment and number of images are given on one line and the resulting
+image filenames are listing on subsequent lines.
+<dl>
+<dt><tt>ribosome.????  1  1 5
+<dd>ribosome.0001, ribosome.0002, ribosome.0003, ribosome.0004, ribosome.0005
+<p>
+<dt>ribosome?.???  2 2 3
+<dd>ribosome0.002, ribosome0.004, ribosome0.006
+<p>
+<dt>lyso5.???  5  -1 3
+<dd>lyso5.005, lyso5.004, lyso5.003
+</dl>
+</BODY>
+</HTML>
