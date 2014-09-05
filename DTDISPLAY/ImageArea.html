@@ -1,0 +1,130 @@
+<HTML>
+<HEAD>
+<!--
+ Copyright (c) 1995 Molecular Structure Corporation
+
+ RESTRICTED RIGHTS NOTICE SHORT FORM (JUNE 1987)
+
+ Use, reproduction, or disclosure is subject to restrictions set
+ forth in Contract No. W-31-109-ENG-38 and Contract No.
+ 943072401 with the University of Chicago, Operator of
+ Argonne National Laboratory.
+-->
+<!--
+
+ Copyright (C) 2014 Rigaku Americas Corporation
+                    9009 New Trails Drive
+                    The Woodlands, TX, USA  77381
+
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice(s), this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice(s), this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Rigaku Americas Corporation nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+ DAMAGE.
+
+-->
+<TITLE>
+Help for dtdisplay: Image area controls
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<H3>dtdisplay on-line help</H3>
+<H1>Image area controls</H1>
+
+dtdisplay has two image display areas, a large one on the right and a small one in the 
+lower left of the main window.  A few commands work in both 
+display areas, while other commands only work in the large display area.
+<dl>
+<dt>Left mouse button pressed down
+<dd>	If you press and hold the left mouse button down in an image display area, the 
+image pixel coordinates and pixel value are displayed in the upper left or upper right of the 
+display area.  As you move the mouse pointer with the left mouse button held down, the 
+information is updated.  This is the fastest way to see pixel values.  This works in both the 
+large and small image display areas.  If the Image border fraction is less than 1, then
+line profiles through the displayed portion of the image are drawn on the right and bottom
+sides.
+
+<dt>Left mouse button released
+<dd>	When you release the left mouse button in the large image display area, this selects 
+the pixel under the mouse pointer.  Information about the pixel is displayed in the scrolled 
+text output area and usually includes pixel coordinate, pixel value, resolution, etc (see 
+above).  Furthermore, the small image display area shows a zoomed region around the 
+selected pixel.
+
+<dt>Middle mouse button
+<dd>	Use the middle mouse button to select a rectangle to zoom in on.  When you press 
+and hold down the middle mouse button a rectangle appears that indicates the area to be 
+zoomed.  Drag the mouse pointer to change the size of the rectangle.  Releasing the 
+middle mouse button displays the zoomed area.  Double-clicking the middle mouse 
+unzooms the image or refreshes an unzoomed image.  If the zoom box is within a single 
+pixel, this also unzooms the image.  If you zoom large enough, the actual pixel values are 
+displayed within the pixels.  The middle mouse button works in both the large and small 
+image display areas.  (SCROLL LOCK MUST BE OFF!)
+<dt>Middle FIRST, then left mouse button pressed down
+<dd>This allows you to pan or move the zoom box around before actually zooming.
+Release the left mouse button to continue to change the size of the zoomed area.
+
+<dt>Left FIRST, then middle mouse button pressed down
+<dd>	If you press and hold the left mouse button down in an image display area, then 
+press and hold the middle mouse button down, you can pan around a zoomed image by dragging
+the mouse around.
+
+<dt>Right mouse button
+<dd>	The right mouse button currently has no function.  Perhaps in the future it will 
+pop-up a menu.
+
+<dt>Changing the color scale
+<dd>If the Image border fraction is less than 1, then a color scale control pops-up
+when the left mouse button is pressed when the cursor is in the line profile area along 
+the bottom of the image area.  You can change the minimum scale value or the maximum
+scale value by grabbing the end of the arrow and moving it left or right.  Values for the
+displayed image 
+are updated only when the left mouse button is released in the bottom line profile area.  To
+cancel any impending changes, move the cursor outside of the bottom line profile area
+and release the left mouse button.  The color scale has marks for 3 values:  the image average
+is a solid vertical line, 1.5 sigma below the average is an ascending half line to the left of the
+average (it may be off scale), 5 sigma above the average is a descending half line to the right of
+the average (it may be off scale).
+<p>
+<img src=ColorScale.gif>
+<p>Example of color scale control.
+<p>
+<dt>Keyboard commands in the image areas
+<dd>	If the keyboard focus is in the large or small image area, then a few keyboard 
+commands can be used.  One way to set the keyboard focus in the small image area is to 
+click on the Scan No. text field, then press the Tab key.  To set the keyboard focus to the 
+large image area, select the scrolled text area, then press Ctrl+Tab.  Keyboard commands 
+are:
+<dl>
+<dt>>, G, <, L 
+<dd>	These zoom (>, G) or unzoom (<, L) the displayed image by a factor of 2.
+
+<dt>I, J, K, M. arrow keys
+<dd>	These shift or pan the view.  The shift is one-tenth of the viewed area or 1 pixel, 
+whichever is larger.
+</dl>
+
+</dl>
+</BODY>
+</HTML>

@@ -1,0 +1,100 @@
+<HTML>
+<HEAD>
+<!--
+ Copyright (c) 1995 Molecular Structure Corporation
+
+ RESTRICTED RIGHTS NOTICE SHORT FORM (JUNE 1987)
+
+ Use, reproduction, or disclosure is subject to restrictions set
+ forth in Contract No. W-31-109-ENG-38 and Contract No.
+ 943072401 with the University of Chicago, Operator of
+ Argonne National Laboratory.
+-->
+<!--
+
+ Copyright (C) 2014 Rigaku Americas Corporation
+                    9009 New Trails Drive
+                    The Woodlands, TX, USA  77381
+
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice(s), this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice(s), this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Rigaku Americas Corporation nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+ DAMAGE.
+
+-->
+<TITLE>
+Help for dtdisplay: View menu
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<H3>dtdisplay on-line help</H3>
+<H1>View menu</H1>
+
+Commands in the View menu are quick ways to change what is viewed in the image 
+display area.
+<dl>
+<dt>Refresh
+<dd>	This refreshes the image display area by remapping from image pixel values to the 
+color scale and displaying the result.
+
+<dt>Zoom...
+<dd>	This does no zooming, but pops up a message box describing how to zoom by 
+dragging out a zoom box with the middle mouse button.  The message box serves as a 
+reminder of the not-so-apparent function of the middle mouse button.  If you zoom
+large enough, then the actual pixel values are superimposed on the image.
+
+<dt>Unzoom
+<dd>	This unzooms a zoomed image and refreshes an unzoomed image.  You can also 
+unzoom an image by double-clicking on it with the middle mouse button.
+
+<dt>Pan...
+<dd>	This does no panning, put pops up a message box describing how to 
+pan by dragging across a zoomed image with BOTH the left and middle mouse buttons pressed
+The message box serves as a reminder of the not-so-apparent function of the middle mouse button.
+
+<dt>Image header...
+<dd>	This displays a new window with the image header in it.  You cannot save any 
+edits made to the image header.
+
+<dt>Calculated reflections
+<dt>Observed reflections
+<dd>	These toggle buttons select whether any available reflection list is displayed or not.  
+Only Observed works for now.  Load a reflection list with the Load refln list command in the File menu.
+
+<dt>Resolution arcs
+<dd>	This displays isoresolution circles or arcs on the image.  Up to 5 arcs
+are displayed.  To determine the resolution of any given arc, simply click on
+it and view the resolution in the scrolled output window in the upper left of
+the dtdisplay window.
+
+<dt>Measure
+<dd>	This selects whether the crystallographic d-spacing in Ångstroms between the last 
+two selected pixels is calculated and displayed in the scrolled text output area.  The 
+detector position and spatial distortion as well as the source wavelength are required to 
+calculate the d-spacing.  If they are unavailable, then the d-spacing is not calculated.
+
+</dl>
+</BODY>
+</HTML>
