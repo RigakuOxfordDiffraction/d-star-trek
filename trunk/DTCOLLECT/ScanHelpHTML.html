@@ -1,0 +1,292 @@
+<!--
+
+ Copyright (C) 2014 Rigaku Americas Corporation
+                    9009 New Trails Drive
+                    The Woodlands, TX, USA  77381
+
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice(s), this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice(s), this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Rigaku Americas Corporation nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+ DAMAGE.
+
+-->
+<H3>dtcollect on-line help</H3>
+<H1>Scan Dialog</H1>
+
+<p><b>Scan...</b>
+<p>
+The Scan dialog window provides a way to create, edit, save, read and collect 
+sophisticated data collection scans.  The Scan dialog as shown in Figure 4 is displayed 
+when Scan... is selected from the Collect menu in the main window.
+
+The Scan dialog has a menubar, a table of scans, output areas to show the status of the 
+scan and image currently being collected, and at the bottom buttons to start, pause and 
+abort a scan. 
+
+<p>
+<img src=Scan1.gif>
+<p><b>dtcollect</b> Scan dialog, narrow view.
+<p> 
+ 
+
+<dl>
+<dt>File
+<dd>
+The File menu has options to read and write scan information and to close or exit from the 
+Scan dialog.  Scan information is saved in the header of an image file.  The header of 
+human-readable ASCII characters consists of keyword=values(s) attributes.  The 
+keywords used for scans are described in the Appendix A.  For now, the first scan in an 
+image header has keywords that all start with the sequence SCAN_.  More than one scan 
+can exist in the image header.  Subsequent scans usually have scan keywords prefixed with 
+a short string such as S1_, S2_ , ... to give a new keyword.  For example, a header with 
+two scans would have (among others)  the keywords:
+<blockquote>
+	SCAN_ROTATION
+	S1_SCAN_ROTATION
+</blockquote>
+
+<dt>Open...
+<dd>	This pop-ups the <a href=ScanFileHTML.html>scan file selection dialog</A> where you select the image or scan 
+file (they have the same format) to read scan information from.  If you 
+select a file, it is read and if there are no errors and it contains scan 
+information, then the scan(s) in the file is (are) inserted into the scan table 
+ON TOP OF the currently selected scan.   Only the currently selected scan 
+is overwritten.  In order to read in a scan file and avoid replacing the 
+currently selected scan, first use the Edit Insert menu item to insert a new 
+scan which then can overwritten.
+
+<dt>Save
+<dd>	This saves the scan to the file that was last read in.  The file is 
+OVERWRITTEN with the new information without prompting you, so be 
+careful.
+
+<dt>Save as...
+<dd>	This pop-ups the <a href=ScanFileHTML.html>scan file selection dialog</a> where you select the scan file to 
+save scan information to.  The file is created if it does not exist, it is 
+OVERWRITTEN if it does exist.
+
+<dt>Close
+<dd>This closes the Scan dialog window.  It does not abort or stop any scans in 
+progess.
+</dl>
+
+<p><b>Edit</b>
+
+<p>The Edit menu allows some simple editing of entire scans within the scan table.  You may
+Cut, Copy, Paste, Insert and Delete an entire row of scan information.  These operations 
+all use the currently selected scan in the scan table.  To select a scan, simply click on any 
+value in the scan or on the scan's radiobox diamond on the left of the scan table.  The 
+currently selected scan is shown by the radio box diamond on the far left
+and by a label above the scan table.
+<dl>
+
+<dt>Cut
+<dd>		Cut the selected scan and remove it from the table.  Save it in a buffer. 
+
+<dt>Copy
+<dd>
+	Copy the selected scan into a buffer, leaving the original scan in the table.
+
+<dt>Paste
+<dd>		Paste the cut or copied scan replacing the currently selected scan.
+
+<dt>Insert
+<dd>	Insert a new scan after the currently selected scan.  To insert a new scan at 
+the beginning of the scan table, insert two scans, cut the first scan in the 
+table and finally paste it over second inserted scan.
+
+<dt>Delete
+<dd>	This is like Cut, except the deleted scan is not saved in a buffer and is lost.
+</dl>
+
+<p><b>View</b>
+<p>
+The View menu allows some simple changes to the display of the scan table.  You can 
+increase or decrease the number of scans visible without scrolling in the scan table.  You 
+can also widen or narrow the window size.  To a certain extent, the view properties 
+change automatically in reaction to cutting and inserting scans.
+
+<dl>
+<dt>Enlarge
+<dd>	Enlarge the scrolled window that contains the scan table by one scan row.  
+No more than 10 rows can be visible at a time.
+
+<dt>Shrink
+<dd>	Shrink the scrolled window that contains the scan table by one scan row.  
+At least one row will remain visible at all times.
+
+<dt>Narrow
+<dd>	Narrow the window, so that only the most common scan properties are 
+visible.  The other properties can be viewed by scrolling with the horizontal 
+scrollbar.   This can also be achieved by resizing the window with the 
+controls provided by the window manager or by selecting the small arrow 
+button above the scan table.
+
+<dt>Widen
+<dd>	Widen the window, so that all the scan properties are visible. This can also 
+be achieved by resizing the window with the controls provided by the 
+window manager or by selecting the small arrow button above the scan 
+table.
+</dl>
+
+<p><b>Scan table</b>
+<p>
+The scan table consists of a series of scans arranged vertically with the individual 
+properties of the scan arranged horizontally.   The scan table has scrollbars on the top and 
+the left side so that you can scroll to view hidden areas of the table.  Below the actual 
+scans are controls to change or effect the values in the currently selected scan row.  To 
+select a scan, simply click on any value in the scan or on the scan’s radiobox diamond on 
+the left of the scan table.  The currently selected scan is shown by highlighting and by a 
+label above the scan table and to the right of the menu bar.
+<p>
+<img src=Scan2.gif>
+<p><b>dtcollect</b> Scan dialog, wide view.
+<p> 
+To change a field in the scan table, simply select the field with the mouse or by tabbing to 
+it and enter the new value(s).  The currently selected field is highlighted.  You may also 
+use shift+<Tab> to go to the previous field with the keyboard.  Values are updated 
+whenever you leave the field by pressing  <Enter>,  <Tab> or using a mouse click.  If a 
+field is blank or begins with an equal sign , then the correspoding value from the previous 
+scan is placed in the field.  That is, every field has a default value whether you can see it or 
+not.  As long as the first scan has values, then all the scans have values.  With this feature, 
+you can insert new scans and change only the values that are different from the previous 
+scan.  This makes it very easy to created sophisticated scan tables with minimal input.
+<p>
+Below each field in a scan row is discussed.  The convenience control below the scan table 
+that effects the field is discussed at the same time.
+
+<dl>
+<dt>Shutter
+<dd>	This gives the shutter status for the images in the scan.  It can be Open, 
+Closed or anything else.  If it is neither Open nor Closed, then the scan is 
+skipped when collecting scans.  This is useful to skip scans.  The control 
+below this field is a radiobox with the Open and Closed choices.
+
+<dt>Rel rot start
+<dd>	The relative rotation angle starting position in degrees.  The actual hard-
+	ware value depends on the crystal goniometer Relative Zero Position 
+values and which axis is designated the rotation axis.  The crystal 
+goniometer moves to the Relative Zero Position plus this value at the start 
+of a scan.  The scrollbar below goes from -360 to 360 degrees in 1 degree 
+increments and 10 degree page increments.  Use the text field to enter 
+values that are not integers.
+
+<dt>Rel rot end
+<dd>		The relative rotation angle ending position in degrees.  Remember that this 
+		is relative to the crystal goniometer Relative Zero Position.
+
+<dt>Rot incr
+<dd>		Rotation angle increment per images in degrees.  Each image exposure will 
+	be this many degrees wide.  The scrollbar goes from 0 to 5.00 in steps of 
+0.05 degrees.
+
+<dt>Time
+<dd>	The exposure time per image in seconds.  The scrollbar has a maximum of 
+3600 seconds, so enter exposure times longer than this directly in the text 
+field.
+
+<dt>Axis
+<dd>	Select either the Phi or Omega axis or enter any axis you wish.  Be aware 
+that names other than Phi or Omega may not be supported on your 
+diffractometer.
+
+<dt>Template
+<dt>Seq Start
+<dt>Seq Incr
+<dd>These together describe a way to give potentially unique names to the 
+images of a scan.  The template is a filename with question marks that will 
+be replaced with the image sequence number.  The first sequence number is 
+given by Sequence Start, and the next by Sequence Start + Sequence 
+Increment and so on.  The  image sequence number is used to fill in the 
+question marks in the template.  Examples:
+<blockquote>
+image.????,     1,  1 gives: image.0001, image.0002, ...
+rib4???.osc,    0,  2 gives: rib4000.osc, rib4002.osc, ...
+test???.???, 2000, -1 gives: test002.000, test001.999, ...
+test???.???, -2000, 1 gives: test-02.000, test-01.999, ...
+</blockquote>
+<p>Note that Sequence Start and Sequence Increment are integers.   The 
+control below this pops up an image file select dialog.  
+Please note that changing any of these fields affects only the image file 
+names.  It does not change the rotation angle start, end or the number of 
+images in a scan.
+<p>
+The default values for these fields are copied from the main window File 
+Image template... command.
+
+<dt>Relative zero position
+<dd>
+These values describe the crystal goniometer and the detector goniometer 
+positions when the rotation angle is at 0.0 (which may or may not be 
+between the Rel rot start and Rel rot end angles).  If the Rel start angle is 
+0.0, then these values are the position of the crystal goniometer and 
+detector at the start of the scan.  The angles are in degrees and distances in 
+millimeters.  The first detector goniometer value MUST BE the sample to 
+detector distance.  The number of angles and distances to enter depends on 
+the diffractometer.  The control below pop-ups a menu to enter these 
+values into separate fields.  The default Relative Zero Position is the 
+current crystal and detector goniometer positions found on the main 
+window, if the current text field is empty when the Scan dialog window is 
+popped up.
+
+<dt>Wavelength
+<dd>	Enter the desired source wavelength in Angstroms or eV.  Any value above 
+100 will be treated as eV, while values below this are assumed to be 
+Angstroms.  The control below pop-ups the wavelength chooser.  The 
+wavelength selected by the chooser will be placed in the scan.  The source 
+will be moved to this wavelength at the beginning of a scan (if possible).  
+There are options to flag the source device controller to optimize the 
+source intensity after the wavelength change and to scan the wavelength 
+near the chosen one to select either peak or inflection points in the scan.  
+This may be useful for multiwavelength anomalous diffraction (MAD) 
+experiments.  The default value of the wavlelength is the wavelength found 
+in the main window, if the current text field is empty when the Scan dialog 
+window is popped up.
+
+<dt>Num osc
+<dd>		The number of oscillations made per image.  Zero oscillations means a 
+		simple rotation is made.
+
+<dt>Dark intvl
+<dd>		Enter the dark current image update interval.  This applies only to CCD
+	and TV detectors.  Dark images will be re-collected at the image interval 
+entered here.
+</dl>
+
+<p><b>	Scan, Pause, Abort</b>
+
+<p>The Scan button starts the actual data acquisition.  All the scans in the table are collected.  
+If there is an error in any scan, then data collection stops.  The scan may be aborted 
+outright or paused after the current image completes by selecting the Abort or Pause 
+buttons.  If paused, the Pause button changes to Resume which can then be selected to 
+resume a scan.
+<p>
+When a scan is active, the main window controls are colored, labelled and updated as 
+described for the Expose button.  The Scan dialog gives the progress of the scan and 
+information about the current image.
+<p>
+As each image is created it is displayed in the image display area of the main window.  
+You can interact with the image with the mouse as described in section 3.4.
+
+
+

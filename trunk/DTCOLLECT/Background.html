@@ -1,0 +1,74 @@
+<!--
+
+ Copyright (C) 2014 Rigaku Americas Corporation
+                    9009 New Trails Drive
+                    The Woodlands, TX, USA  77381
+
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice(s), this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice(s), this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Rigaku Americas Corporation nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+ DAMAGE.
+
+-->
+<H1><b>dtcollect</b> on-line help: Background</H1>
+
+In order to collect single crystal diffraction images from a position-sensitive detector,  you 
+need a program that controls the shutter, the goniometers and detector (i.e. a 
+diffractometer).  You want to collect preliminary images to check that the crystal diffracts 
+and that the Bragg peaks can be integrated.   This is further discussed in the <A HREF=dtdisplay.html><B>dtdisplay</b></A>
+documentation.  <b>dtcollect</b> does the actual data acquisition by controlling the diffractometer hardware.
+
+
+<H4>Running <b>dtcollect</b></h4>
+<P>
+After <b>dtcollect</b> has been installed and placed in your PATH, just enter <b>dtcollect</b> along 
+wiith an optional image filename to run it.   Since <b>dtcollect</b> is an X Window program the 
+standard X command line options are also supported.  Messages are written to stdout and 
+stderr as required. The syntax for running <b>dtcollect</b> is simply:
+
+<b>dtcollect</b>
+
+The <b>dtcollect</b> main window shown later will appear on the display.  The 
+main features of the window are a title, a menu bar with some command buttons, a shutter 
+control panel, an expose control panel, a scan control panel, 
+two goniometer control panels for the crystal and 
+detector, a source wavelength control panel, and a scrolled text 
+output region.  Each of these features is discussed in following sections, but first a word 
+about how to get help within <b>dtcollect</b>.
+
+Getting help
+
+<p>The <A HREF=MainW.html>main window</A> title is usually supplied by the window manager.  <b>dtcollect</b> changes the 
+title in response to user input.  When the mouse is used to arm a 
+button, the title is changed to show what that button does.  If you use Motif 1.2, when 
+you click in a text 
+field or tab to it, the title is changed to show what the text field is used for.  In this way, 
+you can receive continuous context-sensitive help.  If you ever have a question about what 
+a button does, move the mouse pointer over the button, then press and hold down the 
+mouse button.  The title will show what the function of the button is.  To activate the 
+function, simply release the mouse button.  Do not release the mouse button with the 
+pointer in the button unless you want to activate the function.  To avoid activating the 
+function, move the mouse pointer off the button, then release the mouse button.  To see 
+what a text field does, simply click in it and read the help line in the window title.  You 
+can also customize the help lines.  More extensive help can be viewed by 
+selecting the HTML Help Viewer command from the Help menu.

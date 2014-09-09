@@ -1,0 +1,121 @@
+<!--
+
+ Copyright (C) 2014 Rigaku Americas Corporation
+                    9009 New Trails Drive
+                    The Woodlands, TX, USA  77381
+
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice(s), this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice(s), this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Rigaku Americas Corporation nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+ DAMAGE.
+
+-->
+<H1><b>dtcollect</b> on-line help: Main Window Menubar</H1>
+
+<p><b>File menu</b>
+
+<p>The File menu is used to initialize or re-initialize the hardware devices.
+The commands in the file menu are Initialize and Exit.
+
+<dl>
+<dt>Initialize
+<dd>	The Initialize command popups a menu with the following choices:
+<ul>
+<li>	Crystal goniometer	Call initialize routine of the crystal goniometer
+<li>	Detector goniometer	Call initialize routine of the detector goniometer
+<li>	Detector		Call detector initialize routine
+<li>	Shutter		Call shutter initialize routine
+<li>	Sensors		Call sensors (counters) initialize routine
+<li>	Source			Call source device initialize routine
+<li>	All			Call all the hardware device initialize routines
+</ul>
+<blockquote>
+Each of these calls the initialize routine of the respective hardware device.  These routines 
+in turn are site and installation dependent.
+<blockquote>
+<dt>Image template...
+<dd>This command is obsolete.  Use the Scan Template ... button in the main window instead.
+This lets you view and edit the current settings for the image filename 
+template and sequence numbers.  The <a=ImageFileSelect.html>image file selection</A> template dialog box appears as 
+shown elsewhere.  The settings in the dialog box come from the header of the last 
+image read in or from the last time the image template dialog appeared.  The template is 
+set from the top field, NOT the selected filename.  The template should contain question 
+mark characters to be used by d*TREK functions.
+
+ 
+<dt>Exit
+<dd>	This command exits from dtcollect.
+</dl>
+
+<p><b>Edit menu</b>
+
+<p>The edit menu has commands to display dialog boxes that let you edit the some information
+that will appear in image header and to clear the output scrolled text window.
+
+<dl>
+<dt>Image header items...
+<dd>This is currently not implemented.  It pop-ups an unusable dialog box.  Select Cancel or
+Dismiss in this box to dismiss it.
+<dt>Clear output
+<dd>You can clear the output scrolled text window with this item.  You have two choices, either
+clear all the text or only selected text.  To clear selected text, first select the text to clear,
+then press Edit/Clear output/Selected text.
+</dl>
+
+<p><b>View menu</b>
+<p>
+Commands in the View menu are all desensitized.
+This menu has no active commands as of now.
+
+<dl>
+<dt>Image header...
+<dd>
+Use the <b>dtdisplay</b> to view image headers.
+</dl>
+
+<p><b>Collect menu</b>
+<p>The Collect menu provides a way to collect more complicated scans with the <b>dtcollect</b> 
+program.  Presently, only one choice is implemented: Scan...
+
+<dl>
+<dt>Scan ...
+<dd>
+This pop-ups the scan dialog where you can create, edit and save scans.  You can also 
+collect a single scan or multiple scans with the scan dialog.  See <a Href=ScanHelpHTML.html>Scan...</A>
+for details.
+</dl>
+
+<p><b>Help menu</b>
+<p>This help menu provides access to the hyper-text markup language viewer.  
+Context-sensitive help is provided in the main window title whenever a button is armed.  (In Motif 
+version 1.2, the title will also provided help on text fields when they gain keyboard focus.)
+
+<dl>
+<dt>Help via the HTML viewer
+<dd>
+Select this command to activate a hyper-text markup language (HTML) viewer to 
+view the dtcollect HTML help files.  The default HTML viewer is NCSA Mosaic, but this 
+may be changed in the resource file.  If the viewer is already running in the process tree, 
+then it is used, otherwise a new process is created that runs the viewer.
+</dl>
+

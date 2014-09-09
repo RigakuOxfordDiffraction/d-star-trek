@@ -1,0 +1,77 @@
+<!--
+
+ Copyright (C) 2014 Rigaku Americas Corporation
+                    9009 New Trails Drive
+                    The Woodlands, TX, USA  77381
+
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice(s), this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice(s), this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Rigaku Americas Corporation nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+ DAMAGE.
+
+-->
+<H3>dtcollect on-line help</H3>
+<H1>Image Area controls</H1>
+
+dtcollect has a single image display area on the right-hand side of the main window.
+Next are descriptions of mouse and keyboards commands that interact with the image display.
+<dl>
+<dt>Left mouse button pressed down
+<dd>	If you press and hold the left mouse button down in the image display area, the 
+image pixel coordinates and pixel value are displayed in the upper left or upper right of the 
+display area.  As you move the mouse pointer with the left mouse button held down, the 
+information is updated.  This is the fastest way to see pixel values.
+
+<dt>Left mouse button released
+<dd>	When you release the left mouse button in the image display area, this selects 
+the pixel under the mouse pointer.  Information about the pixel is displayed in the scrolled 
+text output area and usually includes pixel coordinate, pixel value, resolution, etc (see 
+above).
+
+<dt>Middle mouse button
+<dd>	Use the middle mouse button to select a rectangle to zoom in on.  When you press 
+and hold down the middle mouse button a rectangle appears that indicates the area to be 
+zoomed.  Drag the mouse pointer to change the size of the rectangle.  Releasing the 
+middle mouse button displays the zoomed area.  Double-clicking the middle mouse 
+unzooms the image or refreshes an unzoomed image.  If the zoom box is within a single 
+pixel, this also unzooms the image.  If you zoom large enough, the actual pixel values are 
+displayed within the pixels.
+
+<dt>Right mouse button
+<dd>	The right mouse button currently has no function.  Perhaps in the future it will 
+pop-up a menu.
+
+<dt>Keyboard commands in the image areas
+<dd>	If the keyboard focus is in the image area, then a few keyboard 
+commands can be used.  Keyboard commands 
+are:
+<dl>
+<dt>>, G, <, L 
+<dd>	These zoom (>, G) or unzoom (<, L) the displayed image by a factor of 2.
+
+<dt>I, J, K, M. arrow keys
+<dd>	These shift or pan the view.  The shift is one-tenth of the viewed area or 1 pixel, 
+whichever is larger.
+</dl>
+
+</dl>

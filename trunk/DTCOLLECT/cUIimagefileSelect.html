@@ -1,0 +1,65 @@
+<!--
+
+ Copyright (C) 2014 Rigaku Americas Corporation
+                    9009 New Trails Drive
+                    The Woodlands, TX, USA  77381
+
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice(s), this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice(s), this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Rigaku Americas Corporation nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+ DAMAGE.
+
+-->
+<H3>dtcollect on-line help</H3>
+<H1>Image File/Template Selection Dialog</H1>
+
+The Image Template dialog is used to specify a unique naming scheme 
+for a  series of images from a scan.  Enter a template or filter that contains
+question marks in the top text field of the dialog.  Select Filter to see
+files that match the template.
+
+<dl>
+<dt>Starting seq. number
+<dd>The starting or first sequence number 
+<dt>Increment
+<dd>The increment between images.  This value will be added to 
+the starting sequence number to get the second image number.  It may be
+negative to decrement the sequence number.
+<dt>Number of images
+<dd>The number of images to use in operations like Tile, Overlay, Average or Statistics.
+</dl>
+<b>Examples</b>
+<p>
+Below are three examples.  In each case the template, the starting sequence
+number, the increment and number of images are given on one line and the resulting
+image filenames are listing on subsequent lines.
+<dl>
+<dt><tt>ribosome.????  1  1 5
+<dd>ribosome.0001, ribosome.0002, ribosome.0003, ribosome.0004, ribosome.0005
+<p>
+<dt>ribosome?.???  2 2 3
+<dd>ribosome0.002, ribosome0.004, ribosome0.006
+<p>
+<dt>lyso5.???  5  -1 3
+<dd>lyso5.005, lyso5.004, lyso5.003
+</dl>
