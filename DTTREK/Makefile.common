@@ -1,0 +1,1330 @@
+#
+# Copyright (C) 2014 Rigaku Americas Corporation
+#                    9009 New Trails Drive
+#                    The Woodlands, TX, USA  77381
+#
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#    * Redistributions of source code must retain the above copyright
+#      notice(s), this list of conditions and the following disclaimer.
+#    * Redistributions in binary form must reproduce the above copyright
+#      notice(s), this list of conditions and the following disclaimer in the
+#      documentation and/or other materials provided with the distribution.
+#    * Neither the name of the Rigaku Americas Corporation nor the
+#      names of its contributors may be used to endorse or promote products
+#      derived from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+# DAMAGE.
+#
+
+
+LIBOBJS	   = 	Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o dskio.o Cstring.o Cscan.o CCommandLine.o \
+		Cgoniometer.o Cnonunf.o ImagePool.o BitmapRLE.o Crotation.o Cwavelength.o \
+		dtrekvec.o Creflnlist.o ResoBins.o Crefln.o Cspacegroup.o Cspatial.o CIceRingLocator.o Cspacegroup_check.o \
+		Ccrystal.o  dtreksys.o Cstat.o dtsvd.o dtrekvec.o CCellReduce.o CImageWait.o \
+		Csource.o Cdetector.o C3Ddata.o dtreklogic.o dtarray.o DTMain.o DTCoreSocket.o \
+                DevErrCode.o CinterpMesh.o CSphericalHarmonic.o CScanBitmap.o Cprofit2D.o $(MSCOBJS)
+
+ANL_PAROBJS =	par_dtrek.o
+
+ANL_TIMOBJS =	anlTimer.o
+
+RM	   = rm -f
+
+all:		$(ALL)
+
+tCimage:	tCimage.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o Crefln.o \
+		Creflnlist.o ResoBins.o Ccrystal.o Cspacegroup.o dskio.o \
+		dtreklogic.o dtrekvec.o dtreksys.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+lib:            libdtrek$(OSTYPE).a  $(ANL_LIBS)
+
+libdtrek$(OSTYPE).a:	$(LIBOBJS)
+		$(AR) -rv $@ $^; $(RANLIB) $@
+
+libpar_dtrek$(OSTYPE).a:	$(ANL_PAROBJS)
+		$(AR) -rv $@ $^
+
+libanl_timer$(OSTYPE).a:	$(ANL_TIMOBJS)
+		$(AR) -rv $@ $^
+
+main.o:		main.cpp Cimage.h Cimage_header.h
+
+Cimage_header.o: Cimage_header.cpp Cimage_header.h
+
+Cimage.o:	Cimage.cpp  Cimage.h
+
+CImageWait.o:	CImageWait.cpp  CImageWait.h
+
+Image.o:	ImagePool.cpp  ImagePool.h
+
+par_dtrek.o:	par_dtrek.cpp par_dtrek.h
+
+Cmem.o:		Cmem.cpp Cmem.h
+
+CEmpericalProfit.o:	CEmpericalProfit.cpp CEmpericalProfit.h
+
+Cgenetic.o:	Cgenetic.cpp Cgenetic.h
+
+Cspatial.o:	Cspatial.cpp  Cspatial.h
+
+Cspacegroup.o:	Cspacegroup.cpp  Cspacegroup.h Dtrek.h  Cspacegroup_table.h
+
+Cspacegroup_check.o:	Cspacegroup_check.cpp  Cspacegroup_check.h 
+
+Ccrystal.o:	Ccrystal.cpp  Ccrystal.h Dtrek.h Cimage_header.h
+
+Cgoniometer.o:	Cgoniometer.cpp  Cgoniometer.h Dtrek.h Cimage_header.h
+
+Csource.o:	Csource.cpp  Csource.h Dtrek.h Cimage_header.h Cwavelength.h
+
+Cdetector.o:	Cdetector.cpp  Cdetector.h Dtrek.h Cimage_header.h
+
+Cwavelength.o:	Cwavelength.cpp  Cwavelength.h Dtrek.h Cimage_header.h
+
+tCspatial:	tCspatial.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o \
+		dskio.o Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o Csource.o \
+		Ccrystal.o Cdetector.o Cnonunf.o ImagePool.o BitmapRLE.o Cgoniometer.o Cwavelength.o \
+		C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o dtsvd.o dtrekvec.o dtreklogic.o  dtreksys.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+tCreflnlist:	tCreflnlist.o ResoBins.o Creflnlist.o ResoBins.o Crefln.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o \
+		Ccrystal.o Cspacegroup.o Cstring.o dtrekvec.o dskio.o \
+		Cgoniometer.o Cdetector.o Cscan.o Crotation.o Cspatial.o Cnonunf.o ImagePool.o \
+		CImageWait.o C3Ddata.o CinterpMesh.o Csource.o dtrekvec.o Cwavelength.o CSphericalHarmonic.o Cprofit2D.o \
+		CScanBitmap.o BitmapRLE.o Cstat.o dtsvd.o dtarray.o \
+		dtreklogic.o dtreksys.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+tR:		tR.o Creflnlist.o ResoBins.o Crefln.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o dskio.o
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+tR.o:		tR.cpp Creflnlist.h Crefln.h Dtrek.h
+
+tCscan:		tCscan.o Cscan.o Crotation.o Cnonunf.o ImagePool.o BitmapRLE.o Cimage.o CGonioMask.o CGonioShadow.o \
+		Cimage_header.o Cstring.o dtrekvec.o \
+		Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o \
+		Ccrystal.o dtreklogic.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o dtreksys.o Cdetector.o \
+		Cgoniometer.o Cspatial.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+tCscan.o:	tCscan.cpp Cscan.h
+
+tCdetector:	tCdetector.o Cdetector.o Cspatial.o Cnonunf.o ImagePool.o BitmapRLE.o Cimage.o CGonioMask.o CGonioShadow.o \
+		Cgoniometer.o Csource.o Cwavelength.o Cimage_header.o \
+		Cimage.o CGonioMask.o CGonioShadow.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Crefln.o Creflnlist.o ResoBins.o Ccrystal.o \
+		Cspacegroup.o dtreklogic.o  dtreksys.o \
+		Cstring.o dskio.o dtrekvec.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+tCdetector.o:	tCdetector.cpp Dtrek.h Cdetector.h Csource.h Cstring.h
+
+tCnonunf:	tCnonunf.o BitmapRLE.o Cnonunf.o ImagePool.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o dskio.o \
+		Cstring.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Crotation.o \
+		Cspacegroup.o dtreklogic.o dtrekvec.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Crefln.o \
+		Creflnlist.o ResoBins.o Ccrystal.o Cdetector.o Cspatial.o Cgoniometer.o \
+		$(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+tCnonunf.o:	tCnonunf.cpp Cnonunf.h 
+
+Cnonunf.o:	Cnonunf.cpp Cnonunf.h BitmapRLE.h
+
+BitmapRLE.o:	BitmapRLE.cpp BitmapRLE.h
+
+Cnonunf.h:	Cimage.h C3Ddata.h Cstring.h
+
+tCstring.o:	tCstring.cpp Cstring.h
+
+tCstring:	tCstring.o Cstring.o 
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+Cjim.o:		Cjim.cpp Cjim.h
+
+testjim:	testjim.o Cjim.o Cstring.o
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+Cnonunf.h:	Dtrek.h
+
+Cimage.h:	Cimage_header.h
+
+Cscalemerge.o:	Cscalemerge.cpp Cscalemerge.h Creflnlist.h Crefln.h Dtrek.h \
+		Cimage_header.h Ccrystal.h
+
+Creflnlist.o:	Creflnlist.cpp Creflnlist.h Crefln.h Dtrek.h
+		$(CC) -c $(CCFLAGS) Creflnlist.cpp
+
+Crefln.o:	Crefln.cpp Creflnlist.h Crefln.h Dtrek.h
+		$(CC) -c $(CCFLAGS) Crefln.cpp
+
+Cinterp.o:	Cinterp.cpp
+
+CinterpMesh.o:	CinterpMesh.cpp CinterpMesh.h
+
+CinterpMesh_.o:	CinterpMesh_.cpp CinterpMesh_.h
+
+Claue.o:	Claue.cpp dtcell.h
+
+Cabsence.o:	Cabsence.cpp dtcell.h
+
+dtcell.o:	dtcell.cpp dtcell.h
+		$(CC) -c $(CCFLAGS) -DCCELL_DEFINE_DATA dtcell.cpp
+
+Cscan.o:	Cscan.cpp Cscan.h
+
+Cscan.h:	Crotation.h Cnonunf.h Cspatial.h Cimage.h
+
+Crotation.o:	Crotation.cpp Crotation.h Dtrek.h
+
+Crotation.h:	Cstring.h Cimage_header.h dtrekvec.h
+
+anlTimer.o:     anlTimer.cpp $(ANL_TIMER_INC)
+
+Cprofit2D.o:	Cprofit2D.cpp Cprofit2D.h
+		$(CC) -c -o $@ $(CCFLAGS) $<
+
+CScanBitmap.o:	CScanBitmap.cpp CScanBitmap.h
+
+Cintegrate.o:	Cintegrate.cpp Cintegrate.h Cfind.h Crefine.h Cpredict.h
+		$(CC) -DLESSMEM -c -o $@ $(CCFLAGS) $<
+
+Cintegrate.h:	Cscan.h Crefine.h Cpredict.h C3Ddata.h Crefln.h
+
+Cspatial.h:	Cimage.h
+
+Creflnlist.h:	Crefln.h
+
+tCimage.o:	tCimage.cpp Cimage.h
+
+dtcell:		DTMainCell.o dtcell.o DTMain.o DTCoreSocket.o Claue.o Cindex.o Cabsence.o Cimage_header.o CCellReduce.o CCommandLine.o DTCoreSocket.o Cspacegroup_check.o \
+		Cstring.o Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o \
+		dtreklogic.o Cdetector.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Csource.o \
+		Cwavelength.o Cgoniometer.o Ccrystal.o Cstring.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o \
+		Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crotation.o Cstat.o dtsvd.o dtarray.o \
+		Ccrystal.o dtrekvec.o  Cscan.o dtreksys.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtheaderedit:	DTMainHeaderEdit.o DTMain.o dtheaderedit.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o Crotation.o DTCoreSocket.o CCommandLine.o \
+		CScanBitmap.o Cprofit2D.o \
+		 Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		Cdetector.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Csource.o Cwavelength.o \
+		Cgoniometer.o Ccrystal.o Cstring.o C3Ddata.o CinterpMesh.o CSphericalHarmonic.o Cstat.o Cscan.o \
+		Ccrystal.o dtrekvec.o  dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtheaderedit.o:	dtheaderedit.cpp Cimage.h
+
+dtarray.o:	dtarray.cpp dtarray.h
+
+dtextractheader: DTMainExtractHeader.o DTMain.o DTCoreSocket.o dtextractheader.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o CCommandLine.o \
+		 Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		Cdetector.o Csource.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Crotation.o Cscan.o \
+		Crotation.o Cscan.o \
+		Cwavelength.o Cgoniometer.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+		Ccrystal.o dtrekvec.o  dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtextractheader.o:	dtextractheader.cpp Cimage.h
+
+dtrotimage:	dtrotimage.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o Crotation.o \
+		Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		Cdetector.o Csource.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cscan.o \
+		Cwavelength.o Cgoniometer.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+		Crotation.o Cscan.o \
+		Ccrystal.o dtrekvec.o  dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtrotimage.o:	dtrotimage.cpp Cimage.h Cstring.h Dtrek.h
+
+dtadam:		dtadam.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o Crotation.o \
+		Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		Cdetector.o Csource.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cscan.o \
+		Cwavelength.o Cgoniometer.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+		Crotation.o Cscan.o \
+		Ccrystal.o dtrekvec.o  dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtadam.o:	dtadam.cpp Cimage.h Cstring.h Dtrek.h
+
+dtcompose:	dtcompose.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o Crotation.o \
+		Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		Cdetector.o Csource.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cscan.o \
+		Cwavelength.o Cgoniometer.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+		Crotation.o Cscan.o \
+		Ccrystal.o dtrekvec.o  dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtcompose.o:	dtcompose.cpp Cimage.h
+
+dtdecompose:	dtdecompose.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o \
+		Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		Cdetector.o Csource.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o \
+		Cwavelength.o Cgoniometer.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+		Crotation.o Cscan.o \
+		Ccrystal.o dtrekvec.o dtreksys.o dtsvd.o dtarray.o $(MSCOBJS) 
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtdecompose.o:	dtdecompose.cpp Cimage.h
+
+dtcreate:	dtcreate.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o \
+		Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o  dtreklogic.o \
+		Cdetector.o Csource.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o \
+		Cwavelength.o Cgoniometer.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+		Crotation.o Cscan.o \
+		Ccrystal.o dtrekvec.o dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtcreate.o:	dtcreate.cpp Cimage.h
+
+dtbeammask.o:	dtbeammask.cpp Cimage.h
+
+dtbeammask:	DTMainBeamMask.o DTMain.o DTCoreSocket.o dtbeammask.o Cimage.o \
+		CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o \
+		Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o \
+		dtreklogic.o CCommandLine.o \
+		Cdetector.o Csource.o Cspatial.o Cnonunf.o CImageWait.o \
+		ImagePool.o BitmapRLE.o \
+		Cwavelength.o Cgoniometer.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+		Crotation.o Cscan.o \
+		Ccrystal.o dtrekvec.o dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtbin:		dtbin.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o Crefln.o \
+		Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		Csource.o Cwavelength.o Cstat.o \
+		Crotation.o Cscan.o \
+		Cdetector.o Cgoniometer.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o \
+		BitmapRLE.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o \
+		Ccrystal.o dtrekvec.o  dtreksys.o dtsvd.o dtarray.o $(MSCOBJS) 
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtbin.o:	dtbin.cpp Cimage.h
+
+dtunbin:	dtunbin.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o Crefln.o \
+		Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		Csource.o Cwavelength.o Cstat.o \
+		Crotation.o Cscan.o \
+		Cdetector.o Cgoniometer.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o \
+		BitmapRLE.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o \
+		Ccrystal.o dtrekvec.o  dtreksys.o dtsvd.o dtarray.o $(MSCOBJS) 
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtunbin.o:	dtunbin.cpp Cimage.h Cimage_header.h
+
+dtunbinD19:	dtunbinD19.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o Crefln.o \
+		Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		Csource.o Cwavelength.o Cstat.o \
+		Crotation.o Cscan.o \
+		Cdetector.o Cgoniometer.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o \
+		BitmapRLE.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o \
+		Ccrystal.o dtrekvec.o  dtreksys.o dtsvd.o dtarray.o $(MSCOBJS) 
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtunbinD19.o:	dtunbinD19.cpp Cimage.h Cimage_header.h
+
+dtmaskfix.o:	dtmaskfix.cpp Cimage.h
+
+dtmaskfix:	dtmaskfix.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o Crefln.o \
+		Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		Csource.o Cwavelength.o Cstat.o \
+		Crotation.o Cscan.o \
+		Cdetector.o Cgoniometer.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o \
+		Ccrystal.o dtrekvec.o  dtreksys.o dtsvd.o dtarray.o $(MSCOBJS) 
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtdezinger:	dtdezinger.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o \
+		Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		Cdetector.o Csource.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o \
+		Cwavelength.o Cgoniometer.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+		Crotation.o Cscan.o \
+		Ccrystal.o dtrekvec.o  dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtdezinger.o:	dtdezinger.cpp Cimage.h
+
+dtsbcdarkmask:	dtsbcdarkmask.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o \
+		Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		Cdetector.o Csource.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o \
+		Cwavelength.o Cgoniometer.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+		Crotation.o Cscan.o \
+		Ccrystal.o dtrekvec.o  dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^ $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtsbcdark:	dtsbcdark.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o \
+		Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		Cdetector.o Csource.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cstat.o \
+		Cwavelength.o Cgoniometer.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cscan.o Crotation.o \
+		Crotation.o Cscan.o \
+		Ccrystal.o dtrekvec.o  dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^ $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtdarksubtract:	dtdarksubtract.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o \
+		Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		Cdetector.o Csource.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o \
+		Cwavelength.o Cgoniometer.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+		Crotation.o Cscan.o \
+		Ccrystal.o dtrekvec.o  dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^ $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtdarksubtract.o: dtbin.cpp Cimage.h
+
+dttesteit:	dttesteit.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o \
+		Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		Cdetector.o Csource.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o \
+		Cwavelength.o Cgoniometer.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+		Crotation.o Cscan.o \
+		Ccrystal.o dtrekvec.o  dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^ $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtmemchecklog.o:	dtmemchecklog.cpp dtmemcheck.h
+
+dtmemchecklog:	dtmemchecklog.o Cstring.o dtreksys.o \
+ 		Creflnlist.o ResoBins.o dtreklogic.o dtrekvec.o Cimage_header.o Cimage.o CGonioMask.o CGonioShadow.o \
+		dskio.o Ccrystal.o Cgoniometer.o Cindex.o Creflnlist.o ResoBins.o \
+		Cspacegroup.o Cwavelength.o Cgoniometer.o Crefln.o Cscan.o \
+		Ccrystal.o Csource.o Cdetector.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Crotation.o \
+                Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Cstat.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtmemcheck.o:	dtmemcheck.cpp dtmemcheck.h
+
+dtmakemarks:	dtmakemarks.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o \
+		Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		Cdetector.o Csource.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o \
+		Cwavelength.o Cgoniometer.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+		Ccrystal.o dtrekvec.o  dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		Crotation.o Cscan.o
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtmakemarks.o:	dtmakemarks.cpp Cimage.h
+
+dtreference:	dtreference.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o Cspatial.o \
+		Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		Cspacegroup.o Cwavelength.o Cgoniometer.o Cscan.o Cstat.o \
+		Ccrystal.o Csource.o Cdetector.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Crotation.o \
+		Crotation.o Cscan.o \
+                Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o  dtreksys.o dtrekvec.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtreference.o:	Cimage.h
+
+dtx2refln.o:	dtx2refln.cpp Cstring.h
+
+dtx2refln:	dtx2refln.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o \
+ 		Creflnlist.o ResoBins.o dtreklogic.o dtrekvec.o Cimage_header.o Cimage.o CGonioMask.o CGonioShadow.o \
+		dskio.o Ccrystal.o Cgoniometer.o Cindex.o Creflnlist.o ResoBins.o \
+		Cspacegroup.o Cwavelength.o Cgoniometer.o Crefln.o Cscan.o \
+		Ccrystal.o Csource.o Cdetector.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Crotation.o CCellReduce.o \
+                Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Cstat.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtscalepack2refln.o:	dtscalepack2refln.cpp Cstring.h des2.h
+
+dtscalepack2refln:	dtscalepack2refln.o Cstring.o dtreksys.o \
+		Cspacegroup.o Crefln.o \
+ 		Creflnlist.o ResoBins.o dtreklogic.o dtrekvec.o Cimage_header.o Cimage.o CGonioMask.o CGonioShadow.o \
+		dskio.o Ccrystal.o Cgoniometer.o Cindex.o Creflnlist.o ResoBins.o \
+		Cspacegroup.o Cwavelength.o Cgoniometer.o Crefln.o Cscan.o \
+		Ccrystal.o Csource.o Cdetector.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Crotation.o \
+                Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Cstat.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtrefln2raxis:	dtrefln2raxis.o Crefln.o Creflnlist.o ResoBins.o Cimage.o CGonioMask.o CGonioShadow.o
+		Cimage_header.o Ccrystal.o Cspacegroup.o Cstring.o dskio.o \
+		dtreklogic.o  dtreksys.o dtrekvec.o dtarray.o $(MSCOBJS) 
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtrefln2raxis.o:	dtrefln2raxis.cpp Crefln.h Creflnlist.h Ccrystal.h \
+			Cimage_header.h
+
+dtrebatch:	dtrebatch.o Crefln.o Creflnlist.o ResoBins.o Cimage.o CGonioMask.o CGonioShadow.o \
+		Cimage_header.o Ccrystal.o Cspacegroup.o Cstring.o dskio.o \
+                Cwavelength.o Cgoniometer.o Cdetector.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o \
+                Csource.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+		Crotation.o Cscan.o \
+		dtreklogic.o  dtreksys.o dtrekvec.o dtsvd.o dtarray.o $(MSCOBJS) 
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtrebatch.o:	dtrebatch.cpp Crefln.h Creflnlist.h Ccrystal.h \
+			Cimage_header.h
+
+dtrefln2numabs:	dtrefln2numabs.o Crefln.o Creflnlist.o ResoBins.o Cimage.o CGonioMask.o CGonioShadow.o \
+		Cimage_header.o Ccrystal.o Cspacegroup.o Cstring.o dskio.o \
+		Cdetector.o Csource.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o \
+		Cwavelength.o Cgoniometer.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+		dtreklogic.o  dtreksys.o dtrekvec.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtrefln2numabs.o:	dtrefln2numabs.cpp Crefln.h Creflnlist.h Ccrystal.h \
+			Cimage_header.h
+
+dtraxis2refln:	dtraxis2refln.o Crefln.o Creflnlist.o ResoBins.o Cimage.o CGonioMask.o CGonioShadow.o \
+		Cimage_header.o Cspacegroup.o Ccrystal.o Cstring.o dskio.o \
+		dtreklogic.o dtrekvec.o  dtreksys.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtraxis2refln.o:	dtraxis2refln.cpp Crefln.h Creflnlist.h Ccrystal.h \
+			Cimage_header.h
+
+dtheadermerge:	dtheadermerge.o Crefln.o Creflnlist.o ResoBins.o Cimage.o CGonioMask.o CGonioShadow.o \
+		Cimage_header.o Ccrystal.o Cspacegroup.o Cstring.o \
+		Cdetector.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Csource.o Cwavelength.o \
+		Cgoniometer.o Ccrystal.o Cstring.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+		Crotation.o Cscan.o dtarray.o \
+		dtreklogic.o dtrekvec.o dskio.o dtreksys.o dtsvd.o $(MSCOBJS)
+		$(CC) -o $@ $^ $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtheadermerge.o:dtheadermerge.cpp Cimage_header.h
+
+dtreflnoverlap:	dtreflnoverlap.o Creflnlist.o ResoBins.o Crefln.o Cscan.o Crotation.o \
+		Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Ccrystal.o Cspacegroup.o Cstring.o \
+		Cdetector.o Csource.o Cwavelength.o Cgoniometer.o Cspatial.o \
+		Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o dtrekvec.o dskio.o dtsvd.o \
+		dtreklogic.o dtreksys.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtreflnmerge:	dtreflnmerge.o DTMain.o DTCoreSocket.o DTMainReflnMerge.o Crefln.o Creflnlist.o ResoBins.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o CCommandLine.o  \
+		Cdetector.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Csource.o Cwavelength.o \
+		CScanBitmap.o Cprofit2D.o \
+		Cgoniometer.o Ccrystal.o Cspacegroup.o Cstring.o C3Ddata.o \
+                CinterpMesh.o CSphericalHarmonic.o \
+                Cstat.o Crotation.o Cscan.o dtarray.o \
+		dtsvd.o dtreklogic.o dtrekvec.o dskio.o dtreksys.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtreflnmerge.o:	dtreflnmerge.cpp Crefln.h Creflnlist.h Ccrystal.h \
+		Cspacegroup.h Cimage_header.h
+
+dtscaleaverage.o:	dtscaleaverage.cpp Cscaleaverage.h 
+		$(CC) -DDISTOR_ONLY -c -o $@ $(CCFLAGS) $<
+
+Cscaleaverage.o:	Cscaleaverage.cpp Cscaleaverage.h Cabsorb.h
+		$(CC) -DDISTOR_ONLY -c -o $@ $(CCFLAGS) $<
+
+Cscale.o:	Cscale.cpp Cscaleaverage.h
+		$(CC) -DDISTOR_ONLY -c -o $@ $(CCFLAGS) $<
+
+CSphericalHarmonic.o:	CSphericalHarmonic.cpp CSphericalHarmonic.h
+		$(CC) -c -o $@ $(CCFLAGS) $<
+
+CExperimentalStrategy.o:	CExperimentalStrategy.cpp CExperimentalStrategy.h
+		$(CC) -c -o $@ $(CCFLAGS) $<
+
+CCommandLine.o:	CCommandLine.cpp CCommandLine.h
+		$(CC) -c -o $@ $(CCFLAGS) $<
+
+CGonioMask.o:	CGonioMask.cpp CGonioMask.h
+		$(CC) -c -o $@ $(CCFLAGS) $<
+
+CGonioShadow.o:	CGonioShadow.cpp CGonioShadow.h
+		$(CC) -c -o $@ $(CCFLAGS) $<
+
+CabsorbModel.o:	CabsorbModel.cpp Cabsorb.h Cstring.h Dtrek.h Cstring.h Creflnlist.h
+		$(CC) -c -o $@ $(CCFLAGS) $<
+
+CabsorbSurface.o:	CabsorbSurface.cpp Cabsorb.h Cstring.h Dtrek.h Cstring.h Creflnlist.h
+		$(CC) -c -o $@ $(CCFLAGS) $<
+
+dtscaleaverage:	DTMainScaleAverage.o dtscaleaverage.o Cscaleaverage.o Crefln.o Cscan.o Crotation.o \
+		Creflnlist.o ResoBins.o Cimage.o CGonioMask.o CGonioShadow.o Cstring.o C3Ddata.o CinterpMesh.o CSphericalHarmonic.o   \
+		CScanBitmap.o Cprofit2D.o DTMain.o DTCoreSocket.o CCommandLine.o \
+		Cimage_header.o Ccrystal.o Cspacegroup.o Cstring.o \
+		Cdetector.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Csource.o Cwavelength.o \
+		Cgoniometer.o Ccrystal.o Cspacegroup.o \
+		dtreklogic.o dtrekvec.o dskio.o dtreksys.o \
+		Cscale.o dtsvd.o Cstat.o dtarray.o $(MSCOBJS) 
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtscalemerge:	dtscalemerge.o Cscalemerge.o Crefln.o Creflnlist.o ResoBins.o Cimage.o CGonioMask.o CGonioShadow.o \
+		Cimage_header.o Ccrystal.o Cspacegroup.o Cstring.o Cstat.o \
+		Cdetector.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Csource.o Cwavelength.o \
+		Cgoniometer.o Ccrystal.o Cspacegroup.o Cstring.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o \
+		dtreklogic.o dtrekvec.o dskio.o dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtscalemerge.o:	dtscalemerge.cpp Cscalemerge.h Crefln.h Creflnlist.h \
+			Ccrystal.h Cspacegroup.h
+
+dtlin:		dtlin.o Crefln.o Creflnlist.o ResoBins.o Cimage.o CGonioMask.o CGonioShadow.o \
+		Cimage_header.o Ccrystal.o Cspacegroup.o Cstring.o \
+		dtreklogic.o dtrekvec.o dskio.o dtreksys.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtlin.o:	dtlin.cpp Crefln.h Creflnlist.h \
+			Ccrystal.h Cspacegroup.h
+
+dtindex:	DTMainIndex.o dtindex.o Cindex.o DTMain.o DTCoreSocket.o Cscan.o Creflnlist.o ResoBins.o  \
+			Crotation.o CEyeballIndex.o CCommandLine.o \
+			CCellReduce.o Cprofit2D.o CScanBitmap.o CImageWait.o \
+			Cspacegroup.o Cwavelength.o Cgoniometer.o \
+			Ccrystal.o Csource.o Cdetector.o C3Ddata.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+                        Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o \
+                        Cimage_header.o Cstring.o dskio.o dtrekvec.o \
+			dtreklogic.o dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtindex.o:	dtindex.cpp Dtrek.h Cindex.h dtrekvec.h C3Ddata.h
+
+dtrefine:	DTMainRefine.o dtrefine.o Crefine.o Cscan.o Creflnlist.o ResoBins.o \
+			Crotation.o CBeamData.o  CBackground.o  \
+			Cspacegroup.o Cwavelength.o Cgoniometer.o CIceRingLocator.o \
+			Ccrystal.o Csource.o Cdetector.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o \
+                        Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o CScanBitmap.o CExperimentalStrategy.o CCellReduce.o CCommandLine.o \
+                        Cimage_header.o Cstring.o dskio.o dtrekvec.o Cprofit2D.o \
+			Cpredict.o Cfind.o CImageWait.o DTMain.o DTCoreSocket.o Cstat.o dtsvd.o dtarray.o \
+			dtreklogic.o dtreksys.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtrefine.o:	dtrefine.cpp Dtrek.h Crefine.h dtrekvec.h C3Ddata.h
+
+dttransforms:	dttransforms.o Ccalibrate.o Cscan.o Creflnlist.o ResoBins.o Crotation.o \
+			Cspacegroup.o Cwavelength.o Cgoniometer.o \
+			Ccrystal.o Csource.o Cdetector.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o \
+                        Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Cstat.o \
+                        Cimage_header.o Cstring.o dskio.o dtrekvec.o \
+			Csocket.o CsocketImg.o dtsvd.o dtarray.o \
+			dtreklogic.o dtreksys.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dttransformc:	dttransformc.o Ccalibrate.o Cscan.o Creflnlist.o ResoBins.o Crotation.o \
+			Cspacegroup.o Cwavelength.o Cgoniometer.o \
+			Ccrystal.o Csource.o Cdetector.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o \
+                        Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Cstat.o \
+                        Cimage_header.o Cstring.o dskio.o dtrekvec.o \
+			Csocket.o CsocketImg.o dtsvd.o dtarray.o \
+			dtreklogic.o dtreksys.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+Csocket.o:	Csocket.cpp Csocket.h
+
+CsocketImg.o:	CsocketImg.cpp CsocketImg.h Csocket.h Cimage.h
+
+dtcalibrate:	DTMainCalibrate.o DTMain.o DTCoreSocket.o CCommandLine.o \
+		dtcalibrate.o Ccalibrate.o Cscan.o Creflnlist.o ResoBins.o Crotation.o \
+			Cspacegroup.o Cwavelength.o Cgoniometer.o \
+			Ccrystal.o Csource.o Cdetector.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+                        Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Cinterp.o \
+                        Cimage_header.o Cstring.o dskio.o dtrekvec.o \
+			dtreklogic.o dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtcalibrate.o:	dtcalibrate.cpp Dtrek.h Ccalibrate.h dtrekvec.h C3Ddata.h
+
+dtcorrect.o:  dtcalibrate.cpp Dtrek.h Ccalibrate.h dtrekvec.h C3Ddata.h
+		$(CC) -DCORRECT_ONLY -c -o $@ $(CCFLAGS) $<
+
+Ccorrect.o:  Ccalibrate.cpp Dtrek.h Ccalibrate.h dtrekvec.h
+		$(CC) -DCORRECT_ONLY -c -o $@ $(CCFLAGS) $<
+
+dtcorrect:	DTMainCorrect.o DTMain.o DTCoreSocket.o CCommandLine.o \
+		dtcorrect.o Ccorrect.o Cscan.o Creflnlist.o ResoBins.o Crotation.o \
+		CScanBitmap.o Cprofit2D.o \
+		Cspacegroup.o Cwavelength.o Cgoniometer.o CImageWait.o \
+		Ccrystal.o Csource.o Cdetector.o C3Ddata.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+		Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Cinterp.o \
+                Cimage_header.o Cstring.o dskio.o dtrekvec.o \
+		dtreklogic.o dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtdistor:	DTMainCorrect.o DTMain.o DTCoreSocket.o CCommandLine.o \
+		dtdistor.o Cdistor.o Cscan.o Creflnlist.o ResoBins.o Crotation.o \
+			Cspacegroup.o Cwavelength.o Cgoniometer.o \
+			Ccrystal.o Csource.o Cdetector.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+                        Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Cinterp.o \
+                        Cimage_header.o Cstring.o dskio.o dtrekvec.o \
+			dtreklogic.o dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+Cdistor.o:  Ccalibrate.cpp Dtrek.h Ccalibrate.h dtrekvec.h
+		$(CC) -DDISTOR_ONLY -c -o $@ $(CCFLAGS) $<
+
+dtdistor.o:  dtcalibrate.cpp Dtrek.h Ccalibrate.h dtrekvec.h C3Ddata.h
+		$(CC) -DDISTOR_ONLY -c -o $@ $(CCFLAGS) $<
+
+dtmultistrategy.o:	dtmultistrategy.cpp
+
+dtmultistrategy:	DTMainMultiStrategy.o dtmultistrategy.o DTMainStrategy.o DTMain.o DTCoreSocket.o Cstrategy.o Cscan.o \
+		Creflnlist.o ResoBins.o Crotation.o StrategyScans.o \
+		CScanBitmap.o Cprofit2D.o  \
+		CExperimentalStrategy.o CCellReduce.o CCommandLine.o \
+		Cspacegroup.o Cwavelength.o Cgoniometer.o Cscaleaverage.o \
+		Ccrystal.o Csource.o Cdetector.o C3Ddata.o CinterpMesh.o CSphericalHarmonic.o CCellReduce.o \
+		Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o \
+		Cimage_header.o Cstring.o dskio.o dtrekvec.o \
+		Cpredict.o Cfind.o CImageWait.o DTMain.o DTCoreSocket.o Cstat.o dtsvd.o dtarray.o \
+		dtreklogic.o dtreksys.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtstrategy:	DTMainStrategy.o dtstrategy.o DTMain.o DTCoreSocket.o Cstrategy.o Cscan.o \
+		Creflnlist.o ResoBins.o Crotation.o StrategyScans.o \
+		CScanBitmap.o Cprofit2D.o  \
+		CExperimentalStrategy.o CCellReduce.o CCommandLine.o \
+		Cspacegroup.o Cwavelength.o Cgoniometer.o Cscaleaverage.o \
+		Ccrystal.o Csource.o Cdetector.o C3Ddata.o CinterpMesh.o CSphericalHarmonic.o CCellReduce.o \
+		Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o \
+		Cimage_header.o Cstring.o dskio.o dtrekvec.o \
+		Cpredict.o Cfind.o CImageWait.o DTMain.o DTCoreSocket.o Cstat.o dtsvd.o dtarray.o \
+		dtreklogic.o dtreksys.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtstrategy.o:	dtstrategy.cpp Dtrek.h dtrekvec.h Cstrategy.h
+
+dtreduce:	dtreduce.o Cindex.o Cscan.o Creflnlist.o ResoBins.o Crotation.o \
+			Cspacegroup.o Cwavelength.o Cgoniometer.o \
+			Ccrystal.o Csource.o Cdetector.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+                        Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o \
+                        Cimage_header.o Cstring.o dskio.o dtrekvec.o dtsvd.o \
+			dtreklogic.o dtreksys.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtreduce.o:	dtreduce.cpp Dtrek.h Cindex.h dtrekvec.h C3Ddata.h
+
+dtnonunf:	dtnonunf.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o \
+		Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		dtrekvec.o  dtreksys.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtnonunf.o:	dtnonunf.cpp Cimage.h
+
+flatnonunf:	flatnonunf.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o dskio.o \
+		$(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+
+tCfind:		tCfind.o DTMain.o DTCoreSocket.o Cfind.o CImageWait.o DTMain.o DTCoreSocket.o Cscan.o Creflnlist.o ResoBins.o Crotation.o \
+                             Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o \
+                             Cimage_header.o dskio.o Cstring.o \
+			     dtrekvec.o Crotation.o Cspacegroup.o Ccrystal.o \
+			     dtreklogic.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o  dtreksys.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+tCfind.o:	tCfind.cpp Dtrek.h Cfind.h Cscan.h Creflnlist.h
+
+tCorient:	tCorient.o Corient.o \
+			Cspacegroup.o Cwavelength.o Cgoniometer.o \
+			Ccrystal.o Csource.o \
+                        Cimage.o CGonioMask.o CGonioShadow.o  Crefln.o Creflnlist.o ResoBins.o \
+                        Cimage_header.o Cstring.o dskio.o dtrekvec.o \
+			dtreklogic.o dtreksys.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+tCorient.o:	tCorient.cpp Dtrek.h Corient.h dtrekvec.h
+
+dtorient:	dtorient.o Corient.o NTHUfixup.o \
+		CScanBitmap.o Cprofit2D.o  \
+		Cspacegroup.o Cwavelength.o Cgoniometer.o Crotation.o Cscan.o \
+		Ccrystal.o Csource.o Cdetector.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o \
+		Cstring.o C3Ddata.o CinterpMesh.o CSphericalHarmonic.o Cstat.o Cimage.o CGonioMask.o CGonioShadow.o  Crefln.o Creflnlist.o ResoBins.o \
+		Cimage_header.o Cstring.o dskio.o dtrekvec.o \
+		dtreklogic.o dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtorient.o:	dtorient.cpp Dtrek.h Corient.h dtrekvec.h
+
+NTHUfixup.o:	NTHUfixup.cpp Dtrek.h Cimage_header.h Cstring.h Ccrystal.h
+
+tCpredict:	tCpredict.o Cpredict.o Cscan.o Creflnlist.o ResoBins.o Crotation.o \
+			    Cspacegroup.o Cwavelength.o Cgoniometer.o \
+			    Ccrystal.o Csource.o Cdetector.o \
+                            Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o \
+			    Corient.o Cimage_header.o dskio.o dtrekvec.o \
+			    dtreklogic.o Cstring.o Cimage.o CGonioMask.o CGonioShadow.o dtarray.o \
+			    Cimage_header.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+tCpredict.o:	tCpredict.cpp Dtrek.h Cpredict.h dtrekvec.h
+
+tCrefine:	tCrefine.o Crefine.o Cscan.o Creflnlist.o ResoBins.o Crotation.o \
+			Cspacegroup.o Cwavelength.o Cgoniometer.o \
+			Ccrystal.o Csource.o Cdetector.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o \
+                        Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o \
+                        Cimage_header.o Cstring.o dskio.o dtrekvec.o \
+			dtreklogic.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+tCrefine.o:	tCrefine.cpp Dtrek.h Crefine.h dtrekvec.h
+
+HelloWorldImp.o:	HelloWorldImp.cpp Cscan.h Cimage_header.h Cstring.h des2.h
+		$(CC) -c -o $@ HelloWorldImp.cpp  $(CCFLAGSDBG)
+
+libhello.so:	HelloWorldImp.o Cstring.o Cimage_header.o Cscan.o
+		$(CC) -o $@ $^  -shared $(CCFLAGS) $(GLIBDIR) $(LIBS) -ldtreklinux-gnu
+
+
+tech.o:		tech.cpp Cstring.h 
+		$(CC) -c -g -o $@ tech.cpp  $(CCFLAGSDBG)
+
+tech:		tech.o
+		$(CC) -g -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+jtest.o:	jtest.cpp Cstring.h des2.h dtarray.h
+		$(CC) -c -o $@ jtest.cpp  $(CCFLAGSDBG)
+
+jtest:		jtest.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o CCellReduce.o \
+ 		Creflnlist.o ResoBins.o dtreklogic.o dtrekvec.o Cimage_header.o Cimage.o CGonioMask.o CGonioShadow.o \
+		dskio.o Ccrystal.o Cgoniometer.o Cindex.o Creflnlist.o ResoBins.o \
+		Cspacegroup.o Cwavelength.o Cgoniometer.o Crefln.o Cscan.o \
+		Ccrystal.o Csource.o Cdetector.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Crotation.o \
+                Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Cstat.o dtsvd.o \
+		dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtshift.o:	dtshift.cpp Cstring.h des2.h
+		$(CC) -c -o $@ dtshift.cpp  $(CCFLAGSDBG)
+dtshift:	dtshift.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o CCellReduce.o \
+ 		Creflnlist.o ResoBins.o dtreklogic.o dtrekvec.o Cimage_header.o Cimage.o CGonioMask.o CGonioShadow.o \
+		dskio.o Ccrystal.o Cgoniometer.o Cindex.o Creflnlist.o ResoBins.o \
+		Cspacegroup.o Cwavelength.o Cgoniometer.o Crefln.o Cscan.o \
+		Ccrystal.o Csource.o Cdetector.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Crotation.o \
+                Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Cstat.o dtsvd.o \
+		dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+jdfjiffy.o:	jdfjiffy.cpp Cstring.h des2.h
+		$(CC) -c -o $@ jdfjiffy.cpp  $(CCFLAGSDBG)
+
+dtscale2sca.o:	dtscale2sca.cpp Cstring.h des2.h
+		$(CC) -c -o $@ dtscale2sca.cpp  $(CCFLAGSDBG)
+
+dtscale2sca:	dtscale2sca.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o \
+ 		Creflnlist.o ResoBins.o dtreklogic.o dtrekvec.o Cimage_header.o Cimage.o CGonioMask.o CGonioShadow.o \
+		dskio.o Ccrystal.o Cgoniometer.o Cindex.o CCellReduce.o Creflnlist.o ResoBins.o \
+		Cspacegroup.o Cwavelength.o Cgoniometer.o Crefln.o Cscan.o \
+		Ccrystal.o Csource.o Cdetector.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Crotation.o \
+                Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Cstat.o dtsvd.o \
+		dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+denzox2dtrek.o:	denzox2dtrek.cpp Cstring.h des2.h
+		$(CC) -c -g -o $@ denzox2dtrek.cpp  $(CCFLAGSDBG)
+
+
+denzox2dtrek:	denzox2dtrek.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o \
+ 		Creflnlist.o ResoBins.o dtreklogic.o dtrekvec.o Cimage_header.o Cimage.o CGonioMask.o CGonioShadow.o \
+		dskio.o Ccrystal.o Cgoniometer.o Cindex.o CCellReduce.o Creflnlist.o ResoBins.o \
+		Cspacegroup.o Cwavelength.o Cgoniometer.o Crefln.o Cscan.o \
+		Ccrystal.o Csource.o Cdetector.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Crotation.o \
+                Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Cstat.o dtsvd.o \
+		dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+xds2dtrek.o:	xds2dtrek.cpp Cstring.h des2.h
+		$(CC) -c -g -o $@ xds2dtrek.cpp  $(CCFLAGSDBG)
+
+xds2dtrek:	xds2dtrek.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o \
+ 		Creflnlist.o ResoBins.o dtreklogic.o dtrekvec.o Cimage_header.o Cimage.o CGonioMask.o CGonioShadow.o \
+		dskio.o Ccrystal.o Cgoniometer.o Cindex.o CCellReduce.o Creflnlist.o ResoBins.o \
+		Cspacegroup.o Cwavelength.o Cgoniometer.o Crefln.o Cscan.o \
+		Ccrystal.o Csource.o Cdetector.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Crotation.o \
+                Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Cstat.o dtsvd.o \
+		dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+sca2dtrek.o:	sca2dtrek.cpp Cstring.h des2.h
+		$(CC) -c -g -o $@ sca2dtrek.cpp  $(CCFLAGSDBG)
+
+sca2dtrek:	sca2dtrek.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o \
+ 		Creflnlist.o ResoBins.o dtreklogic.o dtrekvec.o Cimage_header.o Cimage.o CGonioMask.o CGonioShadow.o \
+		dskio.o Ccrystal.o Cgoniometer.o Cindex.o CCellReduce.o Creflnlist.o ResoBins.o \
+		Cspacegroup.o Cwavelength.o Cgoniometer.o Crefln.o Cscan.o \
+		Ccrystal.o Csource.o Cdetector.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Crotation.o \
+                Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Cstat.o dtsvd.o \
+		dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+scanomerge2dtrek.o:	scanomerge2dtrek.cpp Cstring.h des2.h
+		$(CC) -c -o $@ scanomerge2dtrek.cpp  $(CCFLAGSDBG)
+
+scanomerge2dtrek:	scanomerge2dtrek.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o \
+ 		Creflnlist.o ResoBins.o dtreklogic.o dtrekvec.o Cimage_header.o Cimage.o CGonioMask.o CGonioShadow.o \
+		dskio.o Ccrystal.o Cgoniometer.o Cindex.o CCellReduce.o Creflnlist.o ResoBins.o \
+		Cspacegroup.o Cwavelength.o Cgoniometer.o Crefln.o Cscan.o \
+		Ccrystal.o Csource.o Cdetector.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Crotation.o \
+                Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Cstat.o dtsvd.o \
+		dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+jdfjiffy:	jdfjiffy.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o \
+ 		Creflnlist.o ResoBins.o dtreklogic.o dtrekvec.o Cimage_header.o Cimage.o CGonioMask.o CGonioShadow.o \
+		CCellReduce.o \
+		dskio.o Ccrystal.o Cgoniometer.o Cindex.o Creflnlist.o ResoBins.o \
+		Cspacegroup.o Cwavelength.o Cgoniometer.o Crefln.o Cscan.o \
+		Ccrystal.o Csource.o Cdetector.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Crotation.o \
+                Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Cstat.o dtsvd.o \
+		dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+hello.o:	hello.cpp Cstring.h des2.h
+		$(CC) -c -o $@ hello.cpp  $(CCFLAGSDBG)
+
+hello:		hello.o Cstring.o
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+jjtest:		jtest.o dtrekvec.o Cstring.o dskio.o Cimage.o CGonioMask.o CGonioShadow.o \
+	        Cimage_header.o Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o \
+		Ccrystal.o  C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o dtreklogic.o dtreksys.o \
+		Cscan.o Crotation.o Cgoniometer.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o \
+		Cdetector.o Csource.o Cwavelength.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtplot.o:	dtplot.cpp dtrekvec.h Dtrek.h Cstring.h
+
+dtplot:		dtplot.o \
+		Creflnlist.o ResoBins.o Crotation.o Cspacegroup.o \
+                Cscan.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o \
+		Cimage_header.o dskio.o Cstring.o dtreklogic.o dtrekvec.o \
+		Ccrystal.o Cdetector.o Csource.o Cwavelength.o \
+		Cgoniometer.o  dtreksys.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtdeice:	dtdeice.o Creflnlist.o ResoBins.o Crotation.o Cspacegroup.o \
+                Cscan.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o \
+		Cimage_header.o dskio.o Cstring.o dtreklogic.o dtrekvec.o \
+		Ccrystal.o Cdetector.o Csource.o Cwavelength.o Cstat.o \
+		CBeamData.o CBackground.o dtarray.o CScanBitmap.o \
+		Cgoniometer.o  dtreksys.o dtsvd.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+DTCoreTclParam.o:	DTCoreTclParam.cpp DTCoreTclParam.h
+
+DTMainBeamMask.o:	DTMainBeamMask.cpp DTMainBeamMask.h
+
+DTMainExtractHeader.o:	DTMainExtractHeader.cpp DTMainExtractHeader.h
+
+DTMain.o:	DTMain.cpp DTMain.h Cdetector.h Csource.h
+
+DTMainFind.o:	DTMainFind.cpp DTMainFind.h
+
+DTMainIndex.o:	DTMainIndex.cpp DTMainIndex.h
+
+DTMainRank.o:	DTMainRank.cpp DTMainRank.h
+
+DTMainRanker.o:	DTMainRanker.cpp DTMainRanker.h
+
+DTMainRefine.o:	DTMainRefine.cpp DTMainRefine.h
+
+DTMainPredict.o: DTMainPredict.cpp DTMainPredict.h
+
+DTMainStrategy.o: DTMainStrategy.cpp DTMainStrategy.h
+
+DTMainMultiStrategy.o: DTMainMultiStrategy.cpp DTMainMultiStrategy.h
+
+DTMainIntegrate.o:	DTMainIntegrate.cpp DTMainIntegrate.h
+
+DTMainProfit.o:	DTMainProfit.cpp DTMainProfit.h
+
+DTMainHeaderEdit.o:	DTMainHeaderEdit.cpp DTMainHeaderEdit.h
+
+DTMainReflnMerge.o: DTMainReflnMerge.cpp DTMainReflnMerge.h
+
+DTMainScaleAverage.o: DTMainScaleAverage.cpp DTMainScaleAverage.h
+
+DTMainCompare.o:	DTMainCompare.cpp DTMainCompare.h
+
+DTMainCell.o:	DTMainCell.cpp DTMainCell.h
+
+DTMainCalibrate.o:	DTMainCalibrate.cpp DTMainCalibrate.h
+
+DTMainCorrect.o:	DTMainCalibrate.cpp DTMainCalibrate.h
+			$(CC) -DDISTOR_ONLY -c -o $@ $(CCFLAGS) $<
+
+DTMainAverage.o:	DTMainAverage.cpp DTMainAverage.h
+
+dtfind:		DTMainFind.o dtfind.o Cfind.o CImageWait.o DTMain.o DTCoreSocket.o Creflnlist.o ResoBins.o Crotation.o Cspacegroup.o CIceRingLocator.o  \
+                Cscan.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o C3Ddata.o CinterpMesh.o CSphericalHarmonic.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o \
+		Cimage_header.o dskio.o Cstring.o dtreklogic.o dtrekvec.o \
+		Ccrystal.o Cdetector.o Csource.o Cwavelength.o Cstat.o \
+		CBeamData.o CExperimentalStrategy.o CCellReduce.o CBackground.o dtarray.o CScanBitmap.o Cprofit2D.o \
+		CCommandLine.o \
+		Cgoniometer.o  dtreksys.o dtsvd.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+
+dtpixhist:		DTMainFind.o dtpixhist.o Cfind.o CImageWait.o DTMain.o DTCoreSocket.o DTMain.o DTCoreSocket.o Creflnlist.o ResoBins.o Crotation.o Cspacegroup.o CIceRingLocator.o \
+                Cscan.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o C3Ddata.o CinterpMesh.o CSphericalHarmonic.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o   \
+		Cimage_header.o dskio.o Cstring.o dtreklogic.o dtrekvec.o \
+		Ccrystal.o Cdetector.o Csource.o Cwavelength.o Cstat.o \
+		CBeamData.o CExperimentalStrategy.o CCellReduce.o CBackground.o dtarray.o CScanBitmap.o Cprofit2D.o \
+		CCommandLine.o \
+		Cgoniometer.o  dtreksys.o dtsvd.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+
+
+dtrank:		DTMainRank.o dtrank.o DTMain.o DTCoreSocket.o Creflnlist.o ResoBins.o Crotation.o Cspacegroup.o \
+                Cscan.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o C3Ddata.o CinterpMesh.o CSphericalHarmonic.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o \
+		Cimage_header.o dskio.o Cstring.o dtreklogic.o dtrekvec.o \
+		Ccrystal.o Cdetector.o Csource.o Cwavelength.o Cstat.o \
+		CBeamData.o CExperimentalStrategy.o CCellReduce.o CBackground.o dtarray.o CScanBitmap.o Cprofit2D.o \
+		CCommandLine.o \
+		Cgoniometer.o  dtreksys.o dtsvd.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtranker:	DTMainRanker.o dtranker.o DTMain.o DTCoreSocket.o \
+		Creflnlist.o ResoBins.o Crotation.o Cspacegroup.o \
+		DTCoreTclParam.o DTMainRank.o \
+		DTMainFind.o DTMainIndex.o DTMainRefine.o DTMainExtractHeader.o \
+		Cpredict.o Crefine.o CIceRingLocator.o Cfind.o CImageWait.o DTMain.o DTCoreSocket.o Cindex.o \
+		CCellReduce.o CEyeballIndex.o \
+                Cscan.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o C3Ddata.o CinterpMesh.o CSphericalHarmonic.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o \
+		Cimage_header.o dskio.o Cstring.o dtreklogic.o dtrekvec.o \
+		Ccrystal.o Cdetector.o Csource.o Cwavelength.o Cstat.o \
+		CBeamData.o CExperimentalStrategy.o CCellReduce.o CBackground.o dtarray.o CScanBitmap.o Cprofit2D.o \
+		CCommandLine.o \
+		Cgoniometer.o  dtreksys.o dtsvd.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtgonio:	dtgonio.o Creflnlist.o ResoBins.o Crotation.o Cspacegroup.o \
+                Cscan.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o C3Ddata.o CinterpMesh.o CSphericalHarmonic.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o \
+		Cimage_header.o dskio.o Cstring.o dtreklogic.o dtrekvec.o \
+		Ccrystal.o Cdetector.o Csource.o Cwavelength.o Cstat.o \
+		CBeamData.o CExperimentalStrategy.o CCellReduce.o CBackground.o dtarray.o CScanBitmap.o Cprofit2D.o \
+		Cgoniometer.o  dtreksys.o dtsvd.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtgonio.o:	dtgonio.cpp Cimage_header.h
+
+CBackground.o:	CBackground.cpp CBackground.h
+
+CBeamData.o:	CBeamData.cpp CBeamData.h
+
+dtdisplayupdate.o:	dtdisplayupdate.cpp Dtrek.h Cstring.cpp
+
+dtdisplayupdate:	dtdisplayupdate.o Cstring.o dtreksys.o dtarray.o
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+DTCoreSocket.o:	DTCoreSocket.cpp DTCoreSocket.h
+
+dtintegrate.o:	dtintegrate.cpp Dtrek.h Cintegrate.h Cscan.h Creflnlist.h \
+		Crotation.h $(ANL_TIMER_INC)
+		$(CC) -DLESSMEM -c -o $@ $(CCFLAGS) $<
+
+dtintegrate:	DTMainIntegrate.o dtintegrate.o Cintegrate.o DTMainProfit.o Creflnlist.o ResoBins.o Crotation.o Cprofit2D.o CCommandLine.o DTCoreSocket.o \
+                 Cspacegroup.o Cscan.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o C3Ddata.o Cstat.o \
+                 Cpredict.o Crefine.o Cdetector.o Csource.o Cgoniometer.o \
+                 Ccrystal.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Cimage_header.o Cwavelength.o  \
+                 CinterpMesh.o CSphericalHarmonic.o CScanBitmap.o dtarray.o \
+		 Cstring.o Cfind.o CImageWait.o DTMain.o DTCoreSocket.o dskio.o dtreklogic.o dtrekvec.o \
+		dtreksys.o dtsvd.o dtprofit_main.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtprofitv6.o:	dtprofitv6.cpp Dtrek.h Cintegrate.h Cscan.h Creflnlist.h \
+		Crotation.h
+
+dtprofitv6:	dtprofitv6.o Creflnlist.o ResoBins.o Crotation.o Cintegrate.o Cprofit2D.o \
+                 Cspacegroup.o Cscan.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o C3Ddata.o CinterpMesh.o CSphericalHarmonic.o Cstat.o \
+                 Cpredict.o Crefine.o Cdetector.o Csource.o Cgoniometer.o \
+                 Ccrystal.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Cimage_header.o Cwavelength.o \
+		 Cstring.o Cfind.o CImageWait.o DTMain.o DTCoreSocket.o dskio.o dtreklogic.o \
+		 dtrekvec.o dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtprofit_main.o:	dtprofit.cpp Dtrek.h Cintegrate.h Cscan.h Creflnlist.h \
+		dtprofit.cpp Dtrek.h Cintegrate.h Cscan.h Creflnlist.h \
+		Crotation.h
+		$(CC) -DNO_DTPROFIT_MAIN -c -o $@ $(CCFLAGS) $<
+
+dtprofit.o:	dtprofit.cpp Dtrek.h Cintegrate.h Cscan.h Creflnlist.h \
+		Crotation.h
+
+dtprofit:	DTMainProfit.o dtprofit.o DTMain.o DTCoreSocket.o Creflnlist.o ResoBins.o Crotation.o Cintegrate.o Cprofit2D.o CCommandLine.o DTCoreSocket.o  \
+                 Cspacegroup.o Cscan.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o C3Ddata.o Cstat.o \
+                 Cpredict.o Crefine.o Cdetector.o Csource.o Cgoniometer.o \
+                 Ccrystal.o Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Cimage_header.o Cwavelength.o \
+                 CinterpMesh.o CSphericalHarmonic.o CScanBitmap.o dtarray.o \
+		 Cstring.o Cfind.o CImageWait.o DTMain.o DTCoreSocket.o dskio.o dtreklogic.o \
+		 dtrekvec.o dtreksys.o dtsvd.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtimagederiv.o:	dtimagederiv.cpp Dtrek.h Cscan.h Cimage.h Cimage_header.h
+
+dtimagederiv:	dtimagederiv.o Cscan.o Cimage.o CGonioMask.o CGonioShadow.o Cstring.o Crotation.o \
+		Cimage_header.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o Crefln.o \
+		Creflnlist.o ResoBins.o Ccrystal.o Cspacegroup.o dtreklogic.o \
+		dskio.o dtrekvec.o dtreksys.o dtsvd.o dtarray.o $(MSCOBJS)  
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtactivecountbad.o:	dtactivecountbad.cpp Dtrek.h Cimage.h Cimage_header.h
+
+dtactivecountbad:	dtactivecountbad.o Cscan.o Cimage.o CGonioMask.o CGonioShadow.o Cstring.o Crotation.o \
+		Cimage_header.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o Crefln.o \
+		Creflnlist.o ResoBins.o Ccrystal.o Cspacegroup.o Cdetector.o Csource.o \
+		Cgoniometer.o Cspatial.o Cwavelength.o dtsvd.o dtarray.o \
+		dtreklogic.o dskio.o dtrekvec.o dtreksys.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtadd2.o:	dtadd2.cpp Dtrek.h Crotation.h Cimage.h Cimage_header.h
+
+dtadd2:		dtadd2.o Cscan.o Cimage.o CGonioMask.o CGonioShadow.o Cstring.o Crotation.o \
+		Cimage_header.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o Crefln.o \
+		Creflnlist.o ResoBins.o Ccrystal.o Cspacegroup.o Cdetector.o Csource.o \
+		Cgoniometer.o Cspatial.o Cwavelength.o dtsvd.o dtarray.o \
+		dtreklogic.o dskio.o dtrekvec.o dtreksys.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtcompare:	dtcompare.o Ccompare.o DTMainCompare.o DTMain.o DTCoreSocket.o Cstring.o Creflnlist.o ResoBins.o \
+		dtreklogic.o dtreksys.o dskio.o dtrekvec.o CCommandLine.o \
+		Cimage_header.o Crotation.o Cgoniometer.o \
+		Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Cspacegroup.o Ccrystal.o \
+		Cstat.o Csource.o Cdetector.o \
+		Cscan.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o \
+		Cwavelength.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o dtsvd.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+                                                                          
+dtcompare.o:    dtcompare.cpp Ccompare.h
+
+Ccompare.o:     Ccompare.cpp Ccompare.h
+
+dtaverage.o:	dtaverage.cpp Dtrek.h Cscan.h Cimage.h Cimage_header.h
+
+dtaverage:	DTMainAverage.o DTMain.o DTCoreSocket.o CCommandLine.o \
+		dtaverage.o Cscan.o Cimage.o CGonioMask.o CGonioShadow.o Cstring.o Crotation.o \
+		Cimage_header.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o Crefln.o \
+		Creflnlist.o ResoBins.o Ccrystal.o Cspacegroup.o Cdetector.o Csource.o \
+		Cgoniometer.o Cspatial.o Cwavelength.o dtsvd.o \
+		dtreklogic.o dskio.o dtrekvec.o dtreksys.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtfind.o:	dtfind.cpp Dtrek.h Cfind.h Cscan.h Creflnlist.h Crotation.h
+
+dtpixhist.o:	dtpixhist.cpp Dtrek.h Cfind.h Cscan.h Creflnlist.h Crotation.h
+
+dtpredictimage:	dtpredictimage.o Cpredictimage.o Creflnlist.o ResoBins.o Cscan.o  \
+		Cpredict.o Crotation.o  Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cspacegroup.o \
+                Cgoniometer.o Ccrystal.o Cwavelength.o Csource.o Cdetector.o \
+                Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Cimage_header.o Cstring.o dtsvd.o \
+		C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o dskio.o dtrekvec.o dtreklogic.o dtreksys.o \
+		$(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtpredict:	DTMainPredict.o dtpredict.o Cpredict.o DTMain.o DTCoreSocket.o Creflnlist.o ResoBins.o Cscan.o Crotation.o  \
+                Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cspacegroup.o Cgoniometer.o BitmapRLE.o \
+		CScanBitmap.o Cprofit2D.o CCommandLine.o CExperimentalStrategy.o CCellReduce.o  \
+		Ccrystal.o Cwavelength.o Csource.o Cdetector.o CImageWait.o \
+                Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Cimage_header.o Cstring.o dtsvd.o \
+		C3Ddata.o CinterpMesh.o CSphericalHarmonic.o Cstat.o dskio.o dtrekvec.o dtreklogic.o dtreksys.o \
+		dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtpredict.o:	dtpredict.cpp Dtrek.h Cfind.h Cscan.h Creflnlist.h Crotation.h\
+			Ccrystal.h Csource.h Cdetector.h Cgoniometer.h
+
+dtrekvec.o:	dtrekvec.cpp dtrekvec.h
+
+dtrekvec1.o:	dtrekvec1.cpp dtrekvec.h
+		$(CC) -c -g $(CCDEFS) -I. -I../DTDISPLAY -o $@ dtrekvec1.cpp
+
+dtrekvec2.o:	dtrekvec2.cpp dtrekvec.h
+
+
+dtreklogic.o:	dtreklogic.cpp dtreklogic.h
+
+dtreksys.o:	dtreksys.cpp dtreksys.h
+
+dtreksys.h:	Cstring.h Dtrek.h
+
+ResoBins.o:	ResoBins.cpp ResoBins.h
+
+StrategyScans.o:	StrategyScans.cpp StrategyScans.h
+
+C3Ddata.o:	C3Ddata.cpp C3Ddata.h 
+		$(CC) -DLESSMEM -c -o $@ $(CCFLAGSOPT) $<
+
+C3Ddata.h:      Dtrek.h Cimage.h
+
+Cstrategy.o:	Cstrategy.cpp Cstrategy.h
+
+Cstrategy.h:	Dtrek.h Cimage_header.h
+
+Cpredict.o:	Cpredict.cpp Cpredict.h Dtrek.h
+
+Cpredict.h:	Cimage_header.h Cdetector.h Csource.h Ccrystal.h \
+		Creflnlist.h dtrekvec.h
+
+Corient.o:	Corient.cpp Corient.h Dtrek.h
+
+Corient.h:	Cimage_header.h Csource.h Ccrystal.h Cgoniometer.h \
+		Crotation.h dtrekvec.h
+
+Crefine.o:	Crefine.cpp Crefine.h Dtrek.h
+
+Crefine.h:	Cimage_header.h Cdetector.h Csource.h Ccrystal.h \
+		Crotation.h Creflnlist.h dtrekvec.h
+
+CCellReduce.o:	CCellReduce.cpp CCellReduce.h
+		$(CC) -DLESSMEM -c -o $@ $(CCFLAGSOPT) $<
+
+CCellReduce.h:	Dtrek.h Cimage_header.h Cdetector.h Csource.h Ccrystal.h \
+		Crotation.h Creflnlist.h C3Ddata.h Cimage.h dtrekvec.h
+
+CEyeballIndex.o:	CEyeballIndex.cpp CEyeballIndex.h Dtrek.h Creflnlist.h Cimage_header.h
+
+CIceRingLocator.o:	CIceRingLocator.cpp CIceRingLocator.h Dtrek.h Creflnlist.h Cimage_header.h
+
+Cindex.o:	Cindex.cpp Cindex.h Dtrek.h
+
+Cindex.h:	Cimage_header.h Cdetector.h Csource.h Ccrystal.h \
+		Crotation.h Creflnlist.h dtrekvec.h
+
+Cfind.o:	Cfind.cpp Dtrek.h Cfind.h Cimage.h Cscan.h Creflnlist.h
+
+Cfind.h:	Cimage.h Crotation.h Cspatial.h Cnonunf.h Cscan.h Creflnlist.h
+
+dskio.o:	dskio.cpp dskio.h $(ANL_DTREKIO)
+
+raxis.o:	raxis.cpp raxis.h
+
+bs.o:		bs.cpp bs.h raxis.h
+
+nonius.o:	nonius.cpp nonius.h
+
+marccd.o:	marccd.cpp marccd.h
+
+cbfdtrek.o:	cbfdtrek.cpp cbfdtrek.h
+
+marip.o:	marip.cpp marip.h
+
+winbmp.o:	winbmp.cpp winbmp.h
+
+bas2000.o:	bas2000.cpp bas2000.h
+
+hipic.o:	hipic.cpp hipic.h
+
+pck.o:		pck.c
+
+pck1.o:		pck1.c
+
+adscccd.o:	adscccd.cpp adscccd.h
+
+brandeisccd.o:	brandeisccd.cpp brandeisccd.h
+
+dip2030.o:	dip2030.cpp dip2030.h
+
+medoptics.o:	medoptics.cpp medoptics.h
+
+DevErrCode.o:	DevErrCode.cpp DevErrCode.h
+
+tCimage_header:	tCimage_header.o Cimage_header.o Cstring.o dskio.o \
+		Cimage.o CGonioMask.o CGonioShadow.o Crefln.o Creflnlist.o ResoBins.o Ccrystal.o Cspacegroup.o \
+		dtreklogic.o dtrekvec.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+tCimage_header.o:	tCimage_header.cpp Cimage_header.h
+
+tMSCstring:	tMSCstring.o MSCstring.o
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) -lm
+
+MSCstring.o:	MSCstring.cpp MSCstring.h
+
+Cstring.o:	Cstring.cpp Cstring.h
+
+dtrek2raxis:	dtrek2raxis.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o dskio.o \
+		Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dtreklogic.o \
+		Cdetector.o Csource.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspacegroup.o \
+		Cwavelength.o Cgoniometer.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o dtsvd.o \
+		Crotation.o Cscan.o \
+		Ccrystal.o dtrekvec.o  dtreksys.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtrek2raxis.cpp:	Cimage.h
+
+dtraxis:	dtraxis.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o dskio.o \
+		Crefln.o Creflnlist.o ResoBins.o Cspacegroup.o dtreklogic.o \
+		Ccrystal.o dtrekvec.o  dtreksys.o Cspatial.o Csource.o \
+		Cdetector.o Cgoniometer.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o dtsvd.o \
+		Crotation.o Cscan.o \
+		Cwavelength.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtraxis.cpp:	Cimage.h
+
+dtreorder:	dtreorder.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o Crefln.o \
+		Ccrystal.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		dtrekvec.o dtreksys.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtnonunfedit:	dtnonunfedit.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o Crefln.o \
+		Cdetector.o Cspatial.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Csource.o Cwavelength.o \
+		Cgoniometer.o Cstring.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o dtsvd.o \
+		Ccrystal.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		dtrekvec.o dtreksys.o Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Crotation.o Cscan.o \
+		dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtflip:		dtflip.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o Crefln.o \
+		Ccrystal.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		dtrekvec.o dtreksys.o dtarray.o $(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtsmooth:	dtsmooth.o Cimage.o CGonioMask.o CGonioShadow.o Cimage_header.o Cstring.o Crefln.o dtsvd.o \
+		Ccrystal.o Creflnlist.o ResoBins.o Cspacegroup.o dskio.o dtreklogic.o \
+		Cgoniometer.o Csource.o Cwavelength.o Cdetector.o Cspatial.o \
+		Crotation.o Cscan.o \
+		Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o C3Ddata.o CScanBitmap.o Cprofit2D.o CinterpMesh.o CSphericalHarmonic.o Cstat.o dtrekvec.o dtreksys.o dtarray.o \
+		$(MSCOBJS)
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+dtsvd.o:	dtsvd.h dtsvd.cpp
+
+dtarray.o:	dtarray.h dtarray.cpp
+
+install:	$(ALL)
+		if [ ! -d $(INSTALLDIR) ];then mkdir $(INSTALLDIR);fi;
+		for X in $(ALL); do \
+			cp $$X $(INSTALLDIR); done
+
+clean:
+		$(RM) *.o *$(OSTYPE).a $(ALL)
+
+
+cleanbin:
+		$(RM) $(ALL) Cimage_header.o Cimage.o CGonioMask.o CGonioShadow.o Cstring.o Creflnlist.o dt*.o licenseinfo.o
+
+cleancpp:
+		 ls -la | awk '/.*\.cpp/{ print thad $$9 ; }' | \
+		awk -F. '{ print "rm " $$1".cpp" ;}' | sh
+
+tTests:		tTests.o
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+tTests.o:	tTests.cpp
+
+tio:		tio.o
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+tio.o:		tio.cpp
+
+tss:		tss.o
+		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
+
+tss.o:		tss.cpp
+
+.cc.o:
+		$(COMPILE.cc) $< 
+
+.cpp.o:
+		$(COMPILE.cc) $< 
+
+.c.o:
+		$(COMPILE.cc) $< 
+8mm:
+		tar cf - /rxdat1/people/jwp/DTREK* \
+			/user5/jwp/DTREK* \
+		 | rsh guest@tapes dd of=/dev/rst0 obs=1024
+
+8mm.tarlis:
+		rsh guest@tapes dd if=/dev/rst0 ibs=1024 | tar tvf - >& $@
+

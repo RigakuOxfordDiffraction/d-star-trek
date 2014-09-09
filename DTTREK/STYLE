@@ -1,0 +1,171 @@
+#
+# Copyright (C) 2014 Rigaku Americas Corporation
+#                    9009 New Trails Drive
+#                    The Woodlands, TX, USA  77381
+#
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#    * Redistributions of source code must retain the above copyright
+#      notice(s), this list of conditions and the following disclaimer.
+#    * Redistributions in binary form must reproduce the above copyright
+#      notice(s), this list of conditions and the following disclaimer in the
+#      documentation and/or other materials provided with the distribution.
+#    * Neither the name of the Rigaku Americas Corporation nor the
+#      names of its contributors may be used to endorse or promote products
+#      derived from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+# DAMAGE.
+#
+
+
+When writing source code for d*TREK, you MUST follow the style described
+here.
+
+1. .h  files should follow the template found in TEMPLATE_H.  They should
+       automatically prevent multiple inclusion.
+
+2. .cc files should follow the template found in TEMPLATE_CC
+
+3. Makefiles should follow the template found in Template_makefile
+
+4. Cvs should be used for code management.
+
+5. We will use Hungarian notation throughout for variable names. In particular
+   variables will usually begin with the following letters, followed by a
+   more descriptive name:
+
+   b  -- bool
+   c  -- char
+   n  -- integer, usually int, but sometimes short int;
+   i  -- short int
+   l  -- long int
+   e  -- enumerated type or number
+   s  -- String
+   d  -- double
+   f  -- float
+   h  -- handle to something (usually a structure or object)
+   o  -- object
+   t  -- struct tag
+   v  -- void
+	
+   p  -- pointer
+   pn -- pointer to int or short int
+   pi -- pointer short int
+   pf -- pointer to float
+   pd -- pointer to double
+   pc -- pointer to char
+   ps -- pointer to String
+   po -- pointer to object
+   pr -- pointer to pRocedure (special case)
+   pv -- pointer to void
+   pp -- pointer to pointer (ppf..., ppo..., ..., etc).
+
+   a  -- array (similar to pointer, but arrays are declared afTemp[n])
+   af -- array of floats
+   a3f - array of float with dimension of 3
+   ...
+
+   You cannot change what an array variable points to the way you can change
+       what a pointer points to.  This difference between say afTemp and pfTemp
+       is meant to highlight this distinction.
+
+   r  -- reference (C++ meaning)
+   rn -- reference to int
+   ...
+
+   s  -- static
+   ss -- static String
+   st -- static tag to structure
+   ...
+
+5a. Use m_ to signify a member variable.  Use ms_ to signify a static
+    member variable.
+
+6. We will use the emacs default indentation style for C programs.
+
+7. Test programs for different modules will have the name tMODULE.cc
+
+8. See the Wind River Systems coding conventions.
+   See the FSF/GNU "Standards".
+
+9. In order to make the code more platform independent we must consider
+   the size of data types and alignment in memory.  This is particularly
+   true for integers (int) and pointers on 16-bit, 32-bit and 64-bit
+   architectures.
+	                     sizeof
+   char                      1
+   int                       2 or 4, use only where it does not matter
+   short, short int          2
+   long, long int            4
+                         
+   float                     4
+   double                    8
+ 
+   bool                      ?         
+
+
+   Conflicts:                int         could be 16-bits are 32-bits
+
+                             Boolean     == long int or char, unsigned char?
+                             BOOL        == int on MS Visual C++
+                             BOOL        == char
+   Pointers:
+	on Alphas pointers are 64-bits
+        on PCs    pointers are NEAR, FAR, HUGE, etc
+        on others pointers are 32-bits.
+
+10.  In comparisons with the if, while, etc statements, 
+     put the constant on the right as in:
+         if (0 == nStat)    // CORRECT!
+     and not 
+         if (nStat == 0)    // WRONG!
+
+     This little idea lets the compiler catch typos like:
+         if (0 = nStat)     // TYPO!, caught by compiler
+     but not
+         if (nStat = 0)     // TYPO!, NOT caught by compiler
+
+11. For Motif widgets, try to use a 2-letter mnemonic to begin the
+    widget instance.  Since we are using ICS Builder Xcessory, it starts
+    member variables with _ and not m_.  We can live with that.  Here are
+    suggested 2-letter mnemonics:
+
+    ab	arrowButton
+    cb  cascadeButton
+    pb  pushButton
+    rb  radioButton
+    tb  toggleButton
+    om  optionMenu
+    pm  pulldownMenu
+    pp  popupMenu
+    fr  frame
+    fm  form
+    lb  label
+    tf  textField or text
+    tw  text
+    da  drawingArea
+    sp  separator
+    sb  scrollBar
+    sw  scrolledWindow
+    sc  scale
+    mn  menuBar
+    mw  mainWindow
+    mb  messageBox
+    sd  selection Dialog (selectionBox)
+   fsd  file selection Dialog (special 3 letter mnemonic)
+
+    For example, the "File" button in the main menubar should be called
+    _cbFile, its menu pmFile.  It might have buttons: _pbFileOpen, _pbFileSave,
+    etc.

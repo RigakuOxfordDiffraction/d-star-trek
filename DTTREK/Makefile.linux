@@ -1,0 +1,142 @@
+# This is a Makefile for gcc
+# 01-Mar-95	JWP	Molecular Structure Corporation
+#
+#
+# Copyright (C) 2014 Rigaku Americas Corporation
+#                    9009 New Trails Drive
+#                    The Woodlands, TX, USA  77381
+#
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#    * Redistributions of source code must retain the above copyright
+#      notice(s), this list of conditions and the following disclaimer.
+#    * Redistributions in binary form must reproduce the above copyright
+#      notice(s), this list of conditions and the following disclaimer in the
+#      documentation and/or other materials provided with the distribution.
+#    * Neither the name of the Rigaku Americas Corporation nor the
+#      names of its contributors may be used to endorse or promote products
+#      derived from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+# DAMAGE.
+#
+
+# 
+# Define method to get system architecture to use in subsequent file names:
+#
+
+OSTYPE     =	_linux
+DTREK_BINSUFFIX = $(OSTYPE)
+SHELL	   =	/bin/sh
+#GPP_DIR    =
+GPP_DIR    =   /usr/local/bin/
+#GPP_DIR    =   /usr/bin/
+#GPP_DIR    =   /usr/local/gcc3/bin/
+##CC	   =	$(GPP_DIR)g++ -DLINUX -DDTREK_MEMORY_DEBUG
+CC	   =	$(GPP_DIR)g++ -DLINUX -DBINARY_NOT_BIN -DNO_MFC -D_GNU_SOURCE -pthread -static-libgcc -Wl,-rpath='$ORIGIN' -Wl,--unresolved-symbols=ignore-in-shared-libs -z origin
+
+##CC	   =	$(GPP_DIR)g++ -DLINUX -DBINARY_NOT_BIN -DOLDPROFIT
+##CC	   =	g++ -DLINUX
+
+## WARNING! dtsvd.o is broken if compiled -O2, but -O1 seems to be OK.
+OPTLEV     =    -O1 -g
+#OPTLEV     =    -g
+#OPTLEV     =    -pg
+##OPTLEV     =    -O2 -DUSE_OLD_ERROR_BITS
+
+#############################################################################
+
+# For RAXIS     support add -DRAXIS     to CCDEFS and raxis.o  to MSCOBJS below.
+# For SIEMENS   support add -DSIEMENS   to CCDEFS and bs.o     to MSCOBJS below.
+# For MARCCD    support add -DMARCCD    to CCDEFS and marccd.o to MSCOBJS below.
+# For MARIP     support add -DMARIP     to CCDEFS and marccd.o to MSCOBJS below.
+# For ADSCCCD   support add -DADSCCCD   to CCDEFS and adscccd.o to MSCOBJS below
+# For BrandeisCCD .port add -DBRANDEISCCD  CCDEFS and brandeisccd.o MSCOBJS bel
+# For DIP2030   support add -DDIP2030   to CCDEFS and marccd.o to MSCOBJS below.
+# For PARALLEL  support add -DPARALLEL  to CCDEFS and set ANL_DTREKIO_INC below.
+# For ANL_TIMER support add -DANL_TIMER to CCDEFS and set ANL_TIMER_INC   below.
+
+
+DZ           =
+CCDEFS       = $(DZ)
+
+# Choose only ONE of the next definitions
+
+MSCOBJSDZ   = raxis.o bs.o marccd.o dip2030.o adscccd.o medoptics.o brandeisccd.o marip.o pck.o winbmp.o cbfdtrek.o hipic.o
+
+MSCOBJS    = $(MSCOBJSDZ)
+
+# If -DPARALLEL, you need par_dtrek.h, also set ANL_LDFLAGS and ANL_LIBS below.
+
+ANL_DTREKIO_INC =
+#ANL_DTREKIO_INC = par_dtrek.h
+
+# If -DANL_TIMER, you need anlTimer.h, also set ANL_LDFLAGS and ANL_LIBS below.
+
+ANL_TIMER_INC =
+#ANL_TIMER_INC = anlTimer.h
+
+# Choose only ONE pair of the next pairs of definitions
+# You need the first pair if you have -DANL_TIMER and -DPARALLEL
+
+#ANL_LDFLAGS = -lanl_timer$(OSTYPE)
+#ANL_LIBS    = libanl_timer$(OSTYPE).a
+#ANL_LDFLAGS = -lanl_timer$(OSTYPE) -lpar_dtrek$(OSTYPE) 
+#ANL_LIBS    = libanl_timer$(OSTYPE).a libpar_dtrek$(OSTYPE).a 
+#ANL_LDFLAGS = -lpar_dtrek$(OSTYPE) 
+#ANL_LIBS    =  libpar_dtrek$(OSTYPE).a 
+ANL_LDFLAGS =
+ANL_LIBS    =   
+
+#############################################################################
+
+CCFLAGS	   =	$(OPTLEV) $(CCDEFS) -I. -I../DTDISPLAY \
+                -I../ptypes/include \
+		-I../CBF \
+		-L/usr/local/lib -L../DTDISPLAY -L../../lib -L../lib -L. 
+
+CCFLAGSOPT   =	-O0 -g $(CCDEFS) -I. -I../DTDISPLAY \
+		-L/usr/local/lib -L../DTDISPLAY -L.
+
+CCFLAGSDBG =	-g $(CCDEFS) -I. -I../DTDISPLAY -I../ptypes/include \
+		-L../DTDISPLAY -L.
+
+GLIBDIR	   =    
+COMPILE.cc =	$(CC) -c $(CCFLAGS)
+INSTALLDIR =    ../../bin$(DTREK_BINSUFFIX)
+
+ALL	   =	dtfind dtpixhist dtindex dtrefine dtpredict dtstrategy dtmultistrategy \
+                dtintegrate dtprofit dtcorrect dtreflnmerge dtbeammask \
+		dtscaleaverage dtorient dtheaderedit dtrank dtranker \
+		dtnonunfedit dtaverage dtrek2raxis dtextractheader \
+		dtdezinger dtdarksubtract dtraxis dtcreate dtadd2 dtcompare \
+		dtcompose dtdecompose dtbin dtheadermerge \
+		dtcell dtsmooth dtdistor \
+		dtx2refln dtsbcdark dtsbcdarkmask dtrebatch dtdisplayupdate \
+		licenseinfo sca2dtrek dtscale2sca
+
+# OSF/Motif is NOT needed to compile modules in this directory
+# It helps with distribution if -static is used for linux with these modules
+
+#LIBS	   =	$(MSCOBJS) -ldtrekX$(OSTYPE) -lXt -lX11 -lm
+###linux SLIBS      =	-static -lXp -lXext  -lSM -lICE -lglib
+#LIBS	   = $(ANL_LDFLAGS) -ldtrekX$(OSTYPE) -lxerces-c -L/usr/X11R6/lib -L../ptypes -lXt -lX11 -lm -lcrypt -ldl -lptypes
+# -static removed from after next =
+LIBS	   =  $(ANL_LDFLAGS) -ldtrekX$(OSTYPE) -lxerces-c \
+             -L/usr/X11R6/lib -lXt -lX11 -lm -lcrypt -ldl \
+             -lptypes -lcbf
+
+RANLIB = /bin/true
+
+include Makefile.common
