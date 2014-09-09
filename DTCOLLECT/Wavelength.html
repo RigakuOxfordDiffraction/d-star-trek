@@ -1,0 +1,95 @@
+<HTML>
+<HEAD>
+<!--
+ Copyright (c) 1995 Molecular Structure Corporation
+
+ RESTRICTED RIGHTS NOTICE SHORT FORM (JUNE 1987)
+
+ Use, reproduction, or disclosure is subject to restrictions set
+ forth in Contract No. W-31-109-ENG-38 and Contract No.
+ 943072401 with the University of Chicago, Operator of
+ Argonne National Laboratory.
+-->
+<!--
+
+ Copyright (C) 2014 Rigaku Americas Corporation
+                    9009 New Trails Drive
+                    The Woodlands, TX, USA  77381
+
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice(s), this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice(s), this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Rigaku Americas Corporation nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+ DAMAGE.
+
+-->
+<TITLE>
+Help for dtcollect: Wavelength chooser dialog
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<H3>dtcollect on-line help</H3>
+<H1>Wavelength chooser dialog</H1>
+
+The Wavelength chooser dialog selects a wavelength to perform data collection
+at.  You can select an absolute wavelength or scan across an absorption edge 
+and select a point from the scan.
+<p>
+<img src=Wavelength.gif>
+<p>Wavelength chooser dialog.
+<p> 
+<dl>
+<dt>Common wavelengths
+<dd>This is a list of wavelengths that have been specified in the resource file.
+You can select a wavelength by clicking on it.
+In the resource file, the resource is *cUIwavelength*listItems and the wavelengths are specified as a single string with wavelength separated by a colon as in:
+<p>*cUIwavelength*listItems:  1.54178 Cu Kalpha:0.71069 Mo
+<p>Note the wavelength may be followed by an optional comment.
+<dt>Option
+<dd>This selects the option or method of designating the wavelength.
+<dl>
+<dt>Absolute
+<dd>Move to the wavelength absolutely.
+<dt>Peak
+<dd>Scan near the selected wavelength and move to the peak position.  Check with
+your data collection manager to see if this option works on your system since
+it requires special coding for your hardware.
+<dt>Midpoint
+<dd>Scan near the selected wavelength and move to the inflection point.
+Check with
+your data collection manager to see if this option works on your system since
+it requires special coding for your hardware.
+</dl>
+<dt>Optimize
+<dd>Select whether to optimize intensity through the collimator after moving
+to the selected wavelength or not. Check with
+your data collection manager to see if this option works on your system since
+it requires special coding for your hardware.
+<dt>Wavelength
+<dd>You may enter any allowed wavelength desired here instead of using the
+list selection mechanism.  Any number greater than 100 will assumed to be in 
+electron volts (eV), while one less than or equal to 100 will assumed to be 
+in Ångstroms.
+</BODY>
+</HTML>

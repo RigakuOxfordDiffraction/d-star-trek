@@ -1,0 +1,80 @@
+<!--
+
+ Copyright (C) 2014 Rigaku Americas Corporation
+                    9009 New Trails Drive
+                    The Woodlands, TX, USA  77381
+
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice(s), this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice(s), this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Rigaku Americas Corporation nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+ DAMAGE.
+
+-->
+<TITLE>dtcollect</TITLE>
+<H1>dtcollect on-line help</H1>
+<HR>
+<P>On-line help in <B>dtcollect</B> is provided by HyperText Markup Language
+files that are viewable via a HTML viewer such as NCSA mosaic.
+Help is available by choosing <B>Help</B> in the <B>dtcollect</B> menubar.
+
+With <B>dtcollect</B> you can:
+<UL>
+<LI>  Open and close the X-ray shutter,
+<LI>  Move the crystal goniometer to any allowed position,
+<LI>  Move the detector goniometer (if motorized) to any allowed position,
+<LI>  Move the source to any allowed wavelength (if motorized),
+<LI>  Collect single or multiple exposures with and without opening the shutter and with or without 
+moving the crystal goniometer: shutter-closed stills (dark images), shutter-open stills,  
+shutter-open scans, or shutter-closed scans.  For scans, the crystal can be rotated 
+around either of two crystal goniometer axes that are usually called omega and phi;
+<LI>  Edit, save, and load scans and/or tables of scans,
+<LI>  Collect one scan or a series of up to 100 scans.
+<LI>  Monitor the progress of the experiment through nearly instantaneous feedback on the 
+current status of the hardware devices: shutter, goniometers, counters, and detectors.
+<LI>  Communicate with <b>dtdisplay</b> to automatically display images.
+</UL>
+
+<h3>What is a SCAN?</h3>
+
+As used through the d*TREK documentation a scan is a contiguous set (in time and often in 
+rotation angle) of collected images.  For example, the first image in a scan might be 
+acquired by exposing a crystal for 10 seconds while rotating the phi axis from 0 to 1 
+degree, the second image by rotating the phi axis from 1 to 2 degrees, and the last image 
+by rotating phi from 179 to 180 degrees.  Or a scan might consist of 100 dark or shutter-closed 
+images without moving any motors as a way to characterize the dark current in a 
+CCD (charge-coupled device) detector. 
+
+<H3>For more help, choose one of the following topics:</H3>
+<UL>
+<LI><A HREF=Background.html>Background</A>
+<LI><A HREF=MainW.html>Main window commands</A> 
+<LI><A HREF=MainWMenu.html>Menu commands</A> 
+<LI><A HREF=ScanHelpHTML.html>Scan table dialog</A>
+<LI><A HREF=Example.html>Example</A> of <b>dtcollect</b> main window
+</UL>
+
+<P>Hyperlinks are usually underlined and displayed in blue letters.
+
+<P>To close a Help window, choose <B>File->Close</B> or
+<B>File->Exit</B> from the menubar in this window.
+

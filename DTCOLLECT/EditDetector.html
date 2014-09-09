@@ -1,0 +1,89 @@
+<HTML>
+<HEAD>
+<!--
+ Copyright (c) 1996 Molecular Structure Corporation
+
+ RESTRICTED RIGHTS NOTICE SHORT FORM (JUNE 1987)
+
+ Use, reproduction, or disclosure is subject to restrictions set
+ forth in Contract No. W-31-109-ENG-38 and Contract No.
+ 943072401 with the University of Chicago, Operator of
+ Argonne National Laboratory.
+-->
+<!--
+
+ Copyright (C) 2014 Rigaku Americas Corporation
+                    9009 New Trails Drive
+                    The Woodlands, TX, USA  77381
+
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice(s), this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice(s), this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Rigaku Americas Corporation nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+ DAMAGE.
+
+-->
+<TITLE>
+Help for dtcollect: Edit header itemsdialog
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<H3>dtcollect on-line help</H3>
+<H1>Edit detector items dialog</H1>
+
+With the Edit detector items dialog you can enter the detector modes
+for data collection.
+
+<p> 
+<dl>
+<dt>Binning mode
+<dd>Select the mode for binning pixels during detector readout.
+<dl>
+<dt>1x1
+<dd>In 1x1 mode, no binning is done.  The full pixel resolution of the detector is used.
+<dt>2x2
+<dd>In 2x2 mode, 4 pixels (2 in each direction) are binned during readout.  Images are 1/4 the normal size.
+</dl>
+<dt>Readout speed
+<dd>Select the detector readout speed.
+<dl>
+<dt>Slow
+<dd>In slow mode, the detector readout takes about 9 seconds and introduces the lowest noise.
+<dt>Fast
+<dd>In fast mode, the detector readout takes about 3 seconds, but introduces
+more noise than slow readout mode.
+</dl>
+<dt>Dezinger mode
+<dd>Select the image dezinger mode
+<dl>
+<dt>Normal
+<dd>In normal dezinger mode, each small rotation increment is exposed twice.
+The two images are compared to remove cosmic rays and radioactive decay events.
+<dt>None
+<dd>In none dezinger mode, dezinger is not used.  Each small rotation
+increment is exposed just once.
+</dl>
+</dl>
+</BODY>
+</HTML>

@@ -1,0 +1,163 @@
+<!--
+
+ Copyright (C) 2014 Rigaku Americas Corporation
+                    9009 New Trails Drive
+                    The Woodlands, TX, USA  77381
+
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice(s), this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice(s), this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Rigaku Americas Corporation nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL RIGAKU AMERICAS CORPORATION BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS INTERUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+ DAMAGE.
+
+-->
+<H1><b>dtcollect</b> on-line help: Main Window</H1>
+
+
+<p>On the left-hand side of the main window <A HREF=Example.html>(click here for figure)</A> are controls to open and close the shutter, to 
+make simple single exposures, to move the crystal and detector goniometers and to change the 
+source wavelength.  On the right-hand side is a panel to make a single scan (multiple exposures)
+and a text output scrolled window.  
+
+<p>There are text fields to enter new values and labels to 
+indicate current 
+values.  Buttons are pressed to activate and abort commands.  The button colors and 
+labels change depending on the status of the command.  A red color means a command is 
+active and selecting the button will abort the command.  A yellow color means the 
+command failed or was aborted and selecting the button will re-initialize the corresponding 
+hardware devices.  Green is used to show that the shutter is closed.  The default 
+background color (usually blue or gray) is used to indicate inactive commands.  Buttons 
+and labels are sensitized and desensitized in response to user actions and hardware polling.
+
+<p><b>Shutter</b>
+
+<p>The shutter button opens and closes the shutter “manually”.  The button color is green if 
+the shutter is thought to be closed and red if the shutter is thought to be open.  If the 
+shutter is closed, select the green button and pop-up a menu requesting confirmation that 
+yes, you do want to open the shutter.  Select the red button in the pop-up menu to open 
+the shutter.  If the shutter is open, just select the red button.  For safety reasons,  you need 
+two button clicks to open the shutter, and a single button click to close the shutter.  While 
+the shutter is open, the button label is updated periodically to show the elapsed time in 
+seconds since the shutter was opened.  If the button is yellow, then dtcollect does not 
+understand the state of the hardware shutter.
+
+<p><b>Expose</b>
+
+<p>Single exposures are made with the Expose button.  You can make 4 different kinds of 
+exposures:  Dark, Still and Rotation around Omega and Phi.  All exposures are made at 
+the current crystal and detector positions.  For scans, the crystal goniometer “backs up” 
+one-half of the requested width and rotates forward for the full width during the exposure.  
+Thus, the exposure is centered at the current crystal position.
+
+<p>Select the type of exposure from the option menu, set the exposure time in seconds, and, 
+if desired, set the rotation width in degrees (a width of 0.0 is like a still), then select the 
+Expose button.  The button color changes to red, the button label changes to Abort and 
+the exposure is made.  To abort the exposure, select the button while it is red.  The 
+current exposure time and width are updated periodically as the exposure is made.  When 
+the exposure is finished, the button returns to its original background color.  If the shutter 
+is opened (i.e. a still or scan), the shutter button also reacts and changes to red.  If a 
+goniometer motor moves (i.e. a scan), that button changes to red and the current 
+goniometer position is updated in the panels below.
+
+<p>If the button changes to yellow, then dtcollect does not understand the state of the 
+detector.  Pressing the yellow button will re-initialize the detector hardware.
+
+<p>If the exposure was successful, dtcollect displays the image in the image display area in 
+the right half of the main window.  The image is also written to a file specified by the File 
+Image template... command and the Scan Template textfield.
+
+<p><b>Scan</b>
+
+<p>A single scan of multiple exposures are made with the Scan button.  The exposure type, time
+and width settings of the Expose panel are used for each individual image in the scan.  The
+number of adjacent images and the starting sequence number are specified in the Scan panel.  The
+sequence number increment is set to 1.
+The goniometers are moved to the requested crystal, detector and source positions before the start
+of the scan.  THIS IS DIFFERENT THAN FOR THE EXPOSE BUTTON.  As the scan progresses, the last image file completed is updated in the Last file
+field.
+
+<p><b>Crystal position</b>
+
+<p>Set the desired crystal goniometer position in the text fields in degrees, then select the 
+Move button.  The button color changes to red, the button label changes to Abort and the 
+goniometer moves to the requested position.  To abort the movement, select the button 
+while it is red and labeled Abort.  The current goniometer angles are update periodically as 
+the axes move.  When the goniometer stops moving, the button returns to its original 
+color.
+
+<p>If the button changes to yellow, then an error occurred during the goniometer movement.  
+Look in the scrolled text window for the reason.  Possible errors are illegal angles or a real 
+or predicted collision or jam.  Check the goniometer and your input values, then press the 
+yellow button to re-initialize the goniometer hardware.
+
+<p><b>Detector position</b>
+
+<p>Set the desired detector goniometer position in the text fields.  The distance is set in 
+millimeters while the swing angle is set in degrees.  Select the Move button to move the 
+detector.  The button color changes to red, the button label changes to Abort and the 
+goniometer moves to the requested position.  To abort the movement, select the button 
+while it is red and labeled Abort.  The current position are update periodically as the 
+detector moves.  When the detector goniometer stops moving, the button returns to its 
+original color. 
+
+<p>If the button changes to yellow, then an error occurred during the goniometer movement.  
+Look in the scrolled text window for the reason.  Possible errors are illegal angles or a real 
+or predicted collision or jam.  Check the goniometer and your input values, then press the 
+yellow button to re-initialize the detector goniometer hardware.
+
+<p><b>Source wavelength</b>
+
+<p>This control is sensitized at sites that can allow users to change the source wavelength 
+such as synchrotrons.  Set the desired source wavelength with the <A HREF=Wavelength.html>wavelength chooser</A>or in the text field in Ångstroms or 
+eV, then select the Move button.  The button color changes to red, the button label 
+changes to Abort and the wavelength moves to the requested position.  To abort the 
+movement, select the button while it is red and labeled Abort.  The current wavelength 
+position is update periodically.  When the desired wavelength is reached, the button 
+returns to its original color.  
+
+<p>If the button changes to yellow, then an error occurred while changing the wavelength.  
+Possible errors are an illegal wavelength or a real or predicted collision or jam.  Check the 
+hardware and your input values, then press the yellow button to re-initialize.
+
+<p>To the left of the requested wavelength text field, is a small button labelled ... that pop-ups 
+the <A HREF=Wavelength.html>wavelength chooser</A>.  If you select a wavelength from this dialog, it replaces the 
+value in the text field automatically.
+
+<p><b>Sensors</b>
+
+<p>These are output only fields that display current values of any site-specific sensors on the 
+diffractometer.  Sensors might be used for ionization chambers, temperature controllers, 
+etc.  Consult your system manager to see what site-specific information is displayed here.
+
+<p><b>Command</b>
+
+<p>This control does not function yet.  For non-mouse users, simply use the <tab> button to 
+move among text fields and buttons.  Use the <alt>+character sequence to activate 
+buttons.
+
+<p><b>Output</b>
+<p>The lower-right of the main window is a scrolled text window for messages.  This area
+may be cleared by selecting the Clear output ... button in the Edit menu.
+
+<p>You can also interact with <b>dtcollect</b> through its <a href=MainWMenu.html><b>menu bar</b></a>.
+
+
