@@ -54,6 +54,7 @@
 #include "CrclHelper.h"
 #endif
 
+#include "dtsvd.h"
 
 // This is here only for the sake of dup() and dup2() in one routine.
 #ifdef WIN32

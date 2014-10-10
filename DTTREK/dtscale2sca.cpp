@@ -42,7 +42,7 @@
 //+Include files
 
 #include <iostream>
-#include <iomanip.h>
+#include <iomanip>
 #include "Dtrek.h"
 #include "Cscan.h"
 #include "Ccrystal.h"

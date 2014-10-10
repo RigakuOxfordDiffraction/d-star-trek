@@ -51,7 +51,7 @@ INSTALLDIR      = ../../bin_irix
 CC=g++
 
 ###-DSGI -DRAXIS4_CLIENT 
-C++FLAGS=-g -DFUNCPROTO -DXTFUNCPROTO -L../DTTREK -L../DTDISPLAY -I../DTTREK -I../DTDISPLAY  -I$(DEVDIR) -L$(DEVDIR) -I/usr/local/lib/g++-include 
+C++FLAGS=-g -DNEW_IOS -DFUNCPROTO -DXTFUNCPROTO -L../DTTREK -L../DTDISPLAY -I../DTTREK -I../DTDISPLAY  -I$(DEVDIR) -L$(DEVDIR) -I/usr/local/lib/g++-include 
 LIBS=-ldtrek$(OSTYPE) -ldtrekX$(OSTYPE) -ldtrekDev$(OSTYPE) -lXm -lXt -lX11 -lds -lm -lPW
 OFILES = main-cc.o UIComponent.o bxutils-cc.o callbacks-cc.o CUIviewheader.o CUIheaderEdit.o CUIeditdetector.o CUInumberField.o CUIom8.o CUIom2.o CUIom9.o CUIimagefileSelect.o CUIwavelength.o CUIPSfileSelect.o MainWindow.o 
 FILES = main-cc.cc UIComponent.cc bxutils-cc.cc callbacks-cc.cc CUIviewheader.cc CUIheaderEdit.cc CUIeditdetector.cc  CUInumberField.cc CUIom8.cc CUIom2.cc CUIom9.cc CUIimagefileSelect.cc CUIwavelength.cc CUIPSfileSelect.cc MainWindow.cc 

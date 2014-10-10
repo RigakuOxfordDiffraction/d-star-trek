@@ -36,7 +36,11 @@
  *
  */
 
+#if !defined(VC9) && !defined(__APPLE__) && !defined(NEW_IOS)
 #include <iostream.h>
+#else
+#include <iostream>
+#endif
 #include <libio.h>
 
 #ifdef __cplusplus

@@ -51,7 +51,7 @@ INSTALLDIR      = ../../bin_linux
 CC=g++ -DLINUX
 
 ###-DSGI -DRAXIS4_CLIENT 
-C++FLAGS=-g -DFUNCPROTO -DXTFUNCPROTO -L../DTTREK -L../DTDISPLAY -I../DTTREK -I../DTDISPLAY  -I$(DEVDIR) -L$(DEVDIR) -I/usr/local/lib/g++-include 
+C++FLAGS=-g -DLINUX -DNEW_IOS -DFUNCPROTO -DXTFUNCPROTO -L../DTTREK -L../DTDISPLAY -I../DTTREK -I../DTDISPLAY  -I$(DEVDIR) -L$(DEVDIR) -I/usr/local/lib/g++-include 
 SLIBS= -static -lXp -lXext -lXpm -lSM -lICE
 LIBS=-ldtrek$(OSTYPE) -ldtrekX$(OSTYPE) -ldtrekDev$(OSTYPE) -L/usr/X11R6/lib -lXm -lXt -lX11 $(SLIBS) -lm -lcrypt
 OFILES = main-cc.o UIComponent.o bxutils-cc.o callbacks-cc.o CUIviewheader.o CUIheaderEdit.o CUIeditdetector.o CUInumberField.o CUIom8.o CUIom2.o CUIom9.o CUIimagefileSelect.o CUIwavelength.o CUIPSfileSelect.o MainWindow.o static_lx.o
@@ -115,6 +115,9 @@ CUIPSfileSelect.o: CUIPSfileSelect.cc
 
 MainWindow.o: MainWindow.cc
 	$(CC) $(C++FLAGS) -c MainWindow.cc
+
+static_lx.o: static_lx.cc
+	$(CC) $(C++FLAGS) -c static_lx.cc
 
 Scan1.gif:		Scan1.UU
 	uudecode $^

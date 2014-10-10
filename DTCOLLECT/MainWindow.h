@@ -86,9 +86,16 @@ class CUIimagefileSelect;
 
 // Begin user code block <head>
 
-#include "fstream.h"
-#include "iostream.h"
-#include "iomanip.h"
+#if !defined(VC9) && !defined(__APPLE__) && !defined(NEW_IOS)
+#include <iostream.h>
+#include <fstream.h>
+#include <iomanip.h>
+#else
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+using namespace std;
+#endif
 #include "Dtrek.h"
 #include "dtreksys.h"
 #include "Cstring.h"

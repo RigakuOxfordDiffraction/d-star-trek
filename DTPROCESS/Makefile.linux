@@ -41,11 +41,12 @@
 #
 OSTYPE     =	_linux
 ##CC              = /usr/local/bin/g++ -DLINUX -static
-GPP_DIR    =   /usr/local/bin/
+#GPP_DIR    =   /usr/local/bin/
+GPP_DIR    =   /usr/bin/
 #CC	   =	$(GPP_DIR)g++ -DLINUX -static -g
 CC	   =	$(GPP_DIR)g++ -DLINUX -g
 INSTALLDIR      = ../../bin_linux
-C++FLAGS        = -DFUNCPROTO -DXTFUNCPROTO -L../DTTREK -L../DTDISPLAY -L../../lib -I../DTTREK -I../DTDISPLAY -I/usr/X11R6/include
+C++FLAGS        = -DNEW_IOS -DFUNCPROTO -DXTFUNCPROTO -L../DTTREK -L../DTDISPLAY -L../../lib -I../DTTREK -I../DTDISPLAY -I/usr/X11R6/include
 SLIBS= -lXp -lXext -lSM -lICE -lXpm -lXm -lXt -lX11
 LIBS=-ldtrek$(OSTYPE) -ldtrekX$(OSTYPE)  -L/usr/X11R6/lib -lXm -lXt -lX11 $(SLIBS) -lm -lcrypt -ldl -lcbf
 OFILES = main-cc.o UIComponent.o bxutils-cc.o callbacks-cc.o CUIheaderEdit.o CUIfileFilter.o CUIscrolledlist.o CUIviewheader.o CUInumberField.o CUItextnumArrow.o CUIom9.o MainWindow.o static_lx.o

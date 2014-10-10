@@ -42,8 +42,9 @@
 #
 OSTYPE     = _linux
 ##CC              = /usr/local/bin/g++ -DLINUX -static
-GPP_DIR    =   /usr/local/bin/
-CC	   =	$(GPP_DIR)g++ -DLINUX -DBINARY_NOT_BIN -DNO_MFC -D_GNU_SOURCE -pthread -static-libgcc -Wl,-rpath='$ORIGIN' -Wl,--unresolved-symbols=ignore-in-shared-libs -z origin
+#GPP_DIR    =   /usr/local/bin/
+GPP_DIR    =   /usr/bin/
+CC	   =	$(GPP_DIR)g++ -DNEW_IOS -DLINUX -DBINARY_NOT_BIN -DNO_MFC -D_GNU_SOURCE -pthread -static-libgcc -Wl,-rpath='$ORIGIN' -Wl,--unresolved-symbols=ignore-in-shared-libs -z origin
 #CC	   =	$(GPP_DIR)g++ -DLINUX 
 #CC	   =	$(GPP_DIR)g++ -DLINUX -static
 OPTLEV          = -g -v
