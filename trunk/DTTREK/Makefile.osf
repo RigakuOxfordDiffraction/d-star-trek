@@ -69,7 +69,7 @@ CCDEFS       = $(DZ)
 
 # Choose only ONE of the next definitions
 
-MSCOBJSDZ   = des2.o raxis.o bs.o marccd.o dip2030.o adscccd.o medoptics.o brandeisccd.o marip.o pck.o winbmp.o
+MSCOBJSDZ   = raxis.o bs.o marccd.o dip2030.o adscccd.o medoptics.o brandeisccd.o marip.o pck.o winbmp.o
 
 MSCOBJS    = $(MSCOBJSDZ)
 
@@ -731,33 +731,6 @@ jtest:		jtest.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o \
                 Cnonunf.o BitmapRLE.o Cspatial.o Cimage.o Crefln.o Cstat.o dtsvd.o dtarray.o \
 		$(MSCOBJS)
 		$(CC) -pg -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
-
-licenseinfo.o:	licenseinfo.cc
-		$(CC) -c -O3 -o $@ licenseinfo.cc  $(CCFLAGS)
-
-licenseinfo:	licenseinfo.o Cstring.o dtreksys.o
-		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS) -lm
-
-des2.o:		des2.cc des2.h
-		$(CC) -c -O3 -o $@ des2.cc  $(CCFLAGS)
-
-license.o:	license.cc lic1.jj Cstring.h des2.h
-		$(CC) -c -O3 -o $@ license.cc  $(CCFLAGS)
-
-license:	license.o des2.o Cstring.o dtreksys.o
-		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) -lm -lcrypt
-
-licensekeydemo.o:	license.cc lic1.jj Cstring.h des2.h
-		$(CC) -DDEMO_LICENSE -DLICENSE_KEY -c -g -o $@ license.cc  $(CCFLAGS)
-
-licensekeynotdemo.o:	license.cc lic1.jj Cstring.h des2.h
-		$(CC)  -DLICENSE_KEY -c -g -o $@ license.cc  $(CCFLAGS)
-
-licensekeynotdemo:	licensekeynotdemo.o des2.o Cstring.o dtreksys.o
-		$(CC) -DLICENSE_KEY -o $@ $^  $(CCFLAGS) $(GLIBDIR) -lm -lcrypt
-
-licensekeydemo:	licensekeydemo.o des2.o Cstring.o dtreksys.o
-		$(CC) -DLICENSE_KEY -DDEMO_LICENSE -o $@ $^  $(CCFLAGS) $(GLIBDIR) -lm -lcrypt
 
 jjtest:		jtest.o dtrekvec.o Cstring.o dskio.o Cimage.o \
 	        Cimage_header.o Crefln.o Creflnlist.o Cspacegroup.o \

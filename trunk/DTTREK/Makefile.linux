@@ -40,11 +40,11 @@ OSTYPE     =	_linux
 DTREK_BINSUFFIX = $(OSTYPE)
 SHELL	   =	/bin/sh
 #GPP_DIR    =
-GPP_DIR    =   /usr/local/bin/
-#GPP_DIR    =   /usr/bin/
+#GPP_DIR    =   /usr/local/bin/
+GPP_DIR    =   /usr/bin/
 #GPP_DIR    =   /usr/local/gcc3/bin/
 ##CC	   =	$(GPP_DIR)g++ -DLINUX -DDTREK_MEMORY_DEBUG
-CC	   =	$(GPP_DIR)g++ -DLINUX -DBINARY_NOT_BIN -DNO_MFC -D_GNU_SOURCE -pthread -static-libgcc -Wl,-rpath='$ORIGIN' -Wl,--unresolved-symbols=ignore-in-shared-libs -z origin
+CC	   =	$(GPP_DIR)g++ -DNEW_IOS -DLINUX -DBINARY_NOT_BIN -DNO_MFC -D_GNU_SOURCE -pthread -static-libgcc -Wl,-rpath='$ORIGIN' -Wl,--unresolved-symbols=ignore-in-shared-libs -z origin
 
 ##CC	   =	$(GPP_DIR)g++ -DLINUX -DBINARY_NOT_BIN -DOLDPROFIT
 ##CC	   =	g++ -DLINUX
@@ -103,7 +103,7 @@ ANL_LIBS    =
 
 CCFLAGS	   =	$(OPTLEV) $(CCDEFS) -I. -I../DTDISPLAY \
                 -I../ptypes/include \
-		-I../CBF \
+		-I../CBF/include \
 		-L/usr/local/lib -L../DTDISPLAY -L../../lib -L../lib -L. 
 
 CCFLAGSOPT   =	-O0 -g $(CCDEFS) -I. -I../DTDISPLAY \
@@ -124,7 +124,7 @@ ALL	   =	dtfind dtpixhist dtindex dtrefine dtpredict dtstrategy dtmultistrategy 
 		dtcompose dtdecompose dtbin dtheadermerge \
 		dtcell dtsmooth dtdistor \
 		dtx2refln dtsbcdark dtsbcdarkmask dtrebatch dtdisplayupdate \
-		licenseinfo sca2dtrek dtscale2sca
+		sca2dtrek dtscale2sca
 
 # OSF/Motif is NOT needed to compile modules in this directory
 # It helps with distribution if -static is used for linux with these modules
@@ -135,7 +135,8 @@ ALL	   =	dtfind dtpixhist dtindex dtrefine dtpredict dtstrategy dtmultistrategy 
 # -static removed from after next =
 LIBS	   =  $(ANL_LDFLAGS) -ldtrekX$(OSTYPE) -lxerces-c \
              -L/usr/X11R6/lib -lXt -lX11 -lm -lcrypt -ldl \
-             -lptypes -lcbf
+             -lptypes -lcbf \
+             -L../xerces-c/src/.libs -L../CBF/lib -L../ptypes/lib
 
 RANLIB = /bin/true
 

@@ -83,12 +83,15 @@ do the following:
 
 #include <ctype.h>
 
-#if !defined(WIN32) && !defined(__APPLE__)
+#if !defined(WIN32) && !defined(__APPLE__) && !defined(NEW_IOS)
     #include <iostream.h>
     #include <iomanip.h>
-    #include <string.h>
+#else
+    #include <iostream>
+    #include <iomanip>
 #endif // !WIN32
 
+#include <string.h>
 //#ifndef NO_MFC
 //#include <afx.h>
 

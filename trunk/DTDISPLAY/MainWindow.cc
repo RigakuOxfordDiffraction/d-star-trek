@@ -108,7 +108,11 @@ extern void BX_SET_BACKGROUND_COLOR(Widget, ArgList, Cardinal *, Pixel);
 // Begin user code block <head>
 
 #include <Xm/Protocols.h>
+#if !defined(VC9) && !defined(__APPLE__) && !defined(NEW_IOS)
 #include <iomanip.h>
+#else
+#include <iomanip>
+#endif
 
 Cstring MainWindow::ms_sAtomNameWindowID    = "DTDISPLAY_WINDOW_ID";
 Cstring MainWindow::ms_sAtomNameImageUpdate = "DTDISPLAY_IMAGE_UPDATE";

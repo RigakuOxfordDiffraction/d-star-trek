@@ -10373,7 +10373,7 @@ void MainWindow::vScanRadio(Widget w, XtPointer clientData, XtPointer callData)
 {
     
     // Begin user code block <vScanRadio>
-  int nCdata = (int) clientData;
+  int nCdata = (int) ((long)clientData);
 
   if (nCdata == 0)
     {
@@ -10409,7 +10409,7 @@ void MainWindow::vScanScrollBarCB(Widget w, XtPointer clientData, XtPointer call
     // Begin user code block <vScanScrollBarCB>
 
   XmScrollBarCallbackStruct *pCBS = (XmScrollBarCallbackStruct *)callData;
-  int nCdata = (int) clientData;
+  int nCdata = (int) ((long)clientData);
   long nUdata;
   XtVaGetValues(w, XmNuserData, &nUdata, NULL);
 

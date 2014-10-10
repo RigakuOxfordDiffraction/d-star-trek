@@ -431,7 +431,7 @@ dtx2refln:	dtx2refln.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o \
                 Cnonunf.o CImageWait.o ImagePool.o BitmapRLE.o Cspatial.o Cimage.o CGonioMask.o CGonioShadow.o Cstat.o dtsvd.o dtarray.o $(MSCOBJS)
 		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
 
-dtscalepack2refln.o:	dtscalepack2refln.cpp Cstring.h des2.h
+dtscalepack2refln.o:	dtscalepack2refln.cpp Cstring.h
 
 dtscalepack2refln:	dtscalepack2refln.o Cstring.o dtreksys.o \
 		Cspacegroup.o Crefln.o \
@@ -757,7 +757,7 @@ tCrefine:	tCrefine.o Crefine.o Cscan.o Creflnlist.o ResoBins.o Crotation.o \
 
 tCrefine.o:	tCrefine.cpp Dtrek.h Crefine.h dtrekvec.h
 
-HelloWorldImp.o:	HelloWorldImp.cpp Cscan.h Cimage_header.h Cstring.h des2.h
+HelloWorldImp.o:	HelloWorldImp.cpp Cscan.h Cimage_header.h Cstring.h
 		$(CC) -c -o $@ HelloWorldImp.cpp  $(CCFLAGSDBG)
 
 libhello.so:	HelloWorldImp.o Cstring.o Cimage_header.o Cscan.o
@@ -770,7 +770,7 @@ tech.o:		tech.cpp Cstring.h
 tech:		tech.o
 		$(CC) -g -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
 
-jtest.o:	jtest.cpp Cstring.h des2.h dtarray.h
+jtest.o:	jtest.cpp Cstring.h dtarray.h
 		$(CC) -c -o $@ jtest.cpp  $(CCFLAGSDBG)
 
 jtest:		jtest.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o CCellReduce.o \
@@ -782,7 +782,7 @@ jtest:		jtest.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o CCellReduce.o \
 		dtarray.o $(MSCOBJS)
 		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
 
-dtshift.o:	dtshift.cpp Cstring.h des2.h
+dtshift.o:	dtshift.cpp Cstring.h
 		$(CC) -c -o $@ dtshift.cpp  $(CCFLAGSDBG)
 dtshift:	dtshift.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o CCellReduce.o \
  		Creflnlist.o ResoBins.o dtreklogic.o dtrekvec.o Cimage_header.o Cimage.o CGonioMask.o CGonioShadow.o \
@@ -793,10 +793,10 @@ dtshift:	dtshift.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o CCellReduce.o \
 		dtarray.o $(MSCOBJS)
 		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
 
-jdfjiffy.o:	jdfjiffy.cpp Cstring.h des2.h
+jdfjiffy.o:	jdfjiffy.cpp Cstring.h
 		$(CC) -c -o $@ jdfjiffy.cpp  $(CCFLAGSDBG)
 
-dtscale2sca.o:	dtscale2sca.cpp Cstring.h des2.h
+dtscale2sca.o:	dtscale2sca.cpp Cstring.h
 		$(CC) -c -o $@ dtscale2sca.cpp  $(CCFLAGSDBG)
 
 dtscale2sca:	dtscale2sca.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o \
@@ -808,7 +808,7 @@ dtscale2sca:	dtscale2sca.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o \
 		dtarray.o $(MSCOBJS)
 		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
 
-denzox2dtrek.o:	denzox2dtrek.cpp Cstring.h des2.h
+denzox2dtrek.o:	denzox2dtrek.cpp Cstring.h
 		$(CC) -c -g -o $@ denzox2dtrek.cpp  $(CCFLAGSDBG)
 
 
@@ -821,7 +821,7 @@ denzox2dtrek:	denzox2dtrek.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o \
 		dtarray.o $(MSCOBJS)
 		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
 
-xds2dtrek.o:	xds2dtrek.cpp Cstring.h des2.h
+xds2dtrek.o:	xds2dtrek.cpp Cstring.h
 		$(CC) -c -g -o $@ xds2dtrek.cpp  $(CCFLAGSDBG)
 
 xds2dtrek:	xds2dtrek.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o \
@@ -833,7 +833,7 @@ xds2dtrek:	xds2dtrek.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o \
 		dtarray.o $(MSCOBJS)
 		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
 
-sca2dtrek.o:	sca2dtrek.cpp Cstring.h des2.h
+sca2dtrek.o:	sca2dtrek.cpp Cstring.h
 		$(CC) -c -g -o $@ sca2dtrek.cpp  $(CCFLAGSDBG)
 
 sca2dtrek:	sca2dtrek.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o \
@@ -845,7 +845,7 @@ sca2dtrek:	sca2dtrek.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o \
 		dtarray.o $(MSCOBJS)
 		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
 
-scanomerge2dtrek.o:	scanomerge2dtrek.cpp Cstring.h des2.h
+scanomerge2dtrek.o:	scanomerge2dtrek.cpp Cstring.h
 		$(CC) -c -o $@ scanomerge2dtrek.cpp  $(CCFLAGSDBG)
 
 scanomerge2dtrek:	scanomerge2dtrek.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o \
@@ -867,7 +867,7 @@ jdfjiffy:	jdfjiffy.o Cstring.o dtreksys.o Cspacegroup.o Crefln.o \
 		dtarray.o $(MSCOBJS)
 		$(CC) -o $@ $^  $(CCFLAGS) $(GLIBDIR) $(LIBS)
 
-hello.o:	hello.cpp Cstring.h des2.h
+hello.o:	hello.cpp Cstring.h
 		$(CC) -c -o $@ hello.cpp  $(CCFLAGSDBG)
 
 hello:		hello.o Cstring.o
