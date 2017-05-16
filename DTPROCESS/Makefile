@@ -41,6 +41,9 @@
 #
 #
 
+$(info )
+$(info d*TREK dtprocess Makefile)
+
 CC              = g++
 INSTALLDIR      = ../../bin_irix
 C++FLAGS        = -g -DFUNCPROTO -DXTFUNCPROTO -L../DTTREK -L../DTDISPLAY -I../DTTREK -I../DTDISPLAY  -I/usr/local/lib/g++-include 
